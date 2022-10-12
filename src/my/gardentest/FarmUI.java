@@ -1,4 +1,5 @@
 /*
+ * Comment to change file
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -223,7 +224,6 @@ public class FarmUI extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         jButton1.setText("You clicked me!");
-        //Here is another comment to change it
         
     }//GEN-LAST:event_jButton1MouseClicked
 
