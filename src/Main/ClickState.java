@@ -8,6 +8,6 @@ package Main;
  *
  * @author Julia
  */
-public class JulianFuememler {
+public class ClickState {
     
 }
