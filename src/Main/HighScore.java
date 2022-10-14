@@ -20,6 +20,7 @@ public class HighScore {
     }
     
     public int getMoney(){
+        money = 5;
         return money;
     }
     
