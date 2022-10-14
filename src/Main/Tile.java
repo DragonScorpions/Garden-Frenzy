@@ -11,7 +11,7 @@ package Main;
 public class Tile {
     
     String currentSeed;
-    boolean isEnabled;
+    boolean isEnabled = false;
     
     
     
