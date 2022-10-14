@@ -9,5 +9,8 @@ package Main;
  * @author Julia
  */
 public class ClickState {
-    
+    int age = 10; // TODO: delete me
+    int years = 3; // TODO: delete me
+
+    // println("I am ${age} years old and will be ${kdsfhkjsdfk}")
 }
