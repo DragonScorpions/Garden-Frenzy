@@ -15,11 +15,12 @@ public class HighScore {
     
     
     public HighScore(int rmoney, int rplotsgrown){
-        money = rmoney;
+        money = 100;
         plots_grown = rplotsgrown;
     }
     
     public int getMoney(){
+        money = 5;
         return money;
     }
     
