@@ -17,4 +17,11 @@ public class PlayerData {
         
     }
     
+    
+    //created by Julian as a placeholder
+    // used in StartScreen -- btnContinueActionPerformed()
+    public void loadPlayer(){
+        
+    }
+    
 }

@@ -14,6 +14,7 @@ public class HighScore {
     private int plots_grown;
     
     
+    
     public HighScore(int rmoney, int rplotsgrown){
         money = 100;
         plots_grown = rplotsgrown;
