@@ -26,6 +26,7 @@ public class PlayerData {
             this.plots_unlocked = plots_unlocked;
     }
     
+
     public int getMoney()
     {
         return money;
@@ -36,4 +37,13 @@ public class PlayerData {
         return plants_grown;
     }
    
+
+    
+    //created by Julian as a placeholder
+    // used in StartScreen -- btnContinueActionPerformed()
+    public void loadPlayer(){
+        
+    }
+    
+
 }

@@ -14,6 +14,12 @@ public class HighScore {
     private int plots_grown;
     
     
+    // Added by Julian as a placeholder - Used in the StartScreen constructor
+    public HighScore(){
+        money = 100;
+        plots_grown = 0;
+    }
+    
     public HighScore(int rmoney, int rplotsgrown){
         money = 100;
         plots_grown = rplotsgrown;
