@@ -6,12 +6,15 @@ package Main;
 
 /**
  *
- * @author Julia
+ * @author Ian
  */
 public class Plot {
     Tile tiles[];
     
-    
+    public Plot()
+    {
+        
+    }
     
     
     
