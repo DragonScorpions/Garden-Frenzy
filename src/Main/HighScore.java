@@ -1,14 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Main;
 
 /**
- *
+ * Stores the high score data
  * @author Julia
  */
-public class HighScore {
+public class HighScore extends FileData {
     
     private int money;
     private int plots_grown;
@@ -33,7 +29,16 @@ public class HighScore {
     public int getPlotsGrown(){
         return plots_grown;
     }
-    
-    
-    
+
+    @Override
+    protected String ToFileString() {
+        return money + ", " + plots_grown;
+    }
+
+    @Override
+    protected void ParseFileString(String data) {
+        String[] properties = data.split(", ");
+        money = Integer.parseInt(properties[0]);
+        plots_grown = Integer.parseInt(properties[1]);
+    }
 }
