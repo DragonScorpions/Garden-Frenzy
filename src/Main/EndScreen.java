@@ -22,9 +22,10 @@ public class EndScreen extends javax.swing.JFrame {
         DetermineHighScore(player);
     }
     
-    
-   
-
+    private void DetermineHighScore(PlayerData player){
+        // compare the current and previous score
+        // call filemanager to save the newest highscore
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,10 +111,7 @@ public class EndScreen extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnStartScreenActionPerformed
 
-    private void DetermineHighScore(PlayerData player){
-        // compare the current and previous score
-        // call filemanager to save the newest highscore
-    }
+
     /**
      * @param args the command line arguments
      */

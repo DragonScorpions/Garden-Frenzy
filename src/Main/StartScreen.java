@@ -11,14 +11,17 @@ package Main;
 public class StartScreen extends javax.swing.JFrame {
 
     PlayerData player;
+    HighScore highscore;
     /**
      * Creates new form StartScreen
      */
     
     public StartScreen() {
         //create blank player
+        highscore = new HighScore();
         player = new PlayerData();
         initComponents();
+        displayHighScore.setText("<html>HIGH SCORE<br/>Amount made: " + highscore.getMoney() + "<br/>Crops Grown: " + highscore.getPlotsGrown() + "</html>");
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,7 +35,7 @@ public class StartScreen extends javax.swing.JFrame {
         btnNewGame = new javax.swing.JButton();
         btnContinue = new javax.swing.JButton();
         btnQuit = new javax.swing.JButton();
-        displayHighscore = new javax.swing.JTextField();
+        displayHighScore = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,13 +60,6 @@ public class StartScreen extends javax.swing.JFrame {
             }
         });
 
-        displayHighscore.setText("HighScore goes here");
-        displayHighscore.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                displayHighscoreActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,7 +73,7 @@ public class StartScreen extends javax.swing.JFrame {
                 .addContainerGap(200, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(displayHighscore, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(displayHighScore, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -89,9 +85,9 @@ public class StartScreen extends javax.swing.JFrame {
                 .addComponent(btnContinue, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(btnQuit, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(displayHighscore, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-                .addGap(23, 23, 23))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(displayHighScore, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -108,24 +104,19 @@ public class StartScreen extends javax.swing.JFrame {
 
     private void btnContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinueActionPerformed
         // player is continuing old session
+        // load old gamestate from file
         player.loadPlayer();
         GameScreen gameScreen = new GameScreen(player);
         gameScreen.show();
         
         player = null;
-        dispose(); // 
+        dispose();
     }//GEN-LAST:event_btnContinueActionPerformed
 
     private void btnQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitActionPerformed
         // Exit Program -- possibly a better way to do this
-       
-        dispose(); // just close the program
+        dispose();
     }//GEN-LAST:event_btnQuitActionPerformed
-
-    private void displayHighscoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayHighscoreActionPerformed
-        // get high score somehow
-        displayHighscore.setText("HIGH SCORE\nAmount made: \nCrops Grown: ");
-    }//GEN-LAST:event_displayHighscoreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,7 +150,9 @@ public class StartScreen extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
+                
                 new StartScreen().setVisible(true);
+                
             }
         });
     }
@@ -168,6 +161,6 @@ public class StartScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnContinue;
     private javax.swing.JButton btnNewGame;
     private javax.swing.JButton btnQuit;
-    private javax.swing.JTextField displayHighscore;
+    private javax.swing.JLabel displayHighScore;
     // End of variables declaration//GEN-END:variables
 }

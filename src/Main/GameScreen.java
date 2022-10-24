@@ -17,6 +17,7 @@ public class GameScreen extends javax.swing.JFrame {
      */
     public GameScreen(PlayerData player) {
         //copy player
+        boolean buyMode;
         this.player = player;
         initComponents();
     }
@@ -67,7 +68,6 @@ public class GameScreen extends javax.swing.JFrame {
         
         player = null;
         dispose();
-        
     }//GEN-LAST:event_btnEndScreenActionPerformed
 
     /**
