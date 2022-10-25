@@ -46,24 +46,17 @@ public class PlayerData extends FileData {
     {
         return plants_grown;
     }
-   
-
-    
-    //created by Julian as a placeholder
-    // used in StartScreen -- btnContinueActionPerformed()
-    public void loadPlayer(){
-        
-    }
 
     @Override
     protected String ToFileString() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return money + ", " + plants_grown + ", " + plots_unlocked;
     }
 
     @Override
     protected void ParseFileString(String data) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String[] properties = data.split(", ");
+        money = Integer.parseInt(properties[0]);
+        plants_grown = Integer.parseInt(properties[1]);
+        plots_unlocked = Integer.parseInt(properties[2]);
     }
-    
-
 }

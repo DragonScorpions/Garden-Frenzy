@@ -105,7 +105,7 @@ public class StartScreen extends javax.swing.JFrame {
     private void btnContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinueActionPerformed
         // player is continuing old session
         // load old gamestate from file
-        player.loadPlayer();
+        player.LoadFromFile(Constants.SaveFile);
         GameScreen gameScreen = new GameScreen(player);
         gameScreen.show();
         
