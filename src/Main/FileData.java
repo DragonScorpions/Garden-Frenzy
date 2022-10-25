@@ -6,15 +6,22 @@ import java.nio.file.Paths;
 
 /**
  * Base class for classes that write to file
- * @author xande
+ * @author Xander
  */
 public abstract class FileData {
     /**
-     * Saves the data to the specified file name
-     * @param fileName 
-     *        The file to be saved to
+     * Determines if it can load from the file
+     * @return True if the file exists
      */
-    public void SaveToFile(String fileName) {
+    public Boolean FileExists() {
+        return Files.exists(Paths.get(GetFileName()));
+    }
+    
+    /**
+     * Saves the data to the specified file name
+     */
+    public void SaveToFile() {
+        String fileName = GetFileName();
         try {
             Files.writeString(Paths.get(fileName), ToFileString());
         } catch (IOException e) {
@@ -24,10 +31,9 @@ public abstract class FileData {
     
     /**
      * Loads the data from the specified file name
-     * @param fileName 
-     *        The file to be loaded from
      */
-    public void LoadFromFile(String fileName) {
+    public void LoadFromFile() {
+        String fileName = GetFileName();
         try {
             ParseFileString(Files.readString(Paths.get(fileName)));
         } catch(IOException e) {
@@ -37,15 +43,19 @@ public abstract class FileData {
     
     /**
      * Converts class data to a string to be written to a file
-     * @return 
-     *         The string to be saved
+     * @return The string to be saved
      */
     protected abstract String ToFileString();
     
     /**
      * Populates class data from the given string
-     * @param data 
-     *        The string to be loaded
+     * @param data The string to be loaded
      */
     protected abstract void ParseFileString(String data);
+    
+    /**
+     * Gets the name of the file to save and load from
+     * @return The name
+     */
+    protected abstract String GetFileName();
 }

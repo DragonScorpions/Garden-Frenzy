@@ -1,19 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Main;
 
 /**
+ * Stores the player's values
  *
- * @author Julia
+ * @author Julia and Xander
  */
 public class PlayerData extends FileData {
-    
+
     private int money;
     private int plants_grown;
     private int plots_unlocked;
-    
+
     /**
      * Default constructor for blank PlayerData
      */
@@ -24,8 +21,7 @@ public class PlayerData extends FileData {
     }
     
    /**
-   * The default constructor of Playerdata.
-   * Sets all init values to zero
+   * The default constructor of PlayerData.
    * @param money (int) How much money the player has.  
    * @param plants_grown  (int) How many plants total has the player grown.
    * @param plots_unlocked (int) How many plots has the player unlocked
@@ -36,15 +32,28 @@ public class PlayerData extends FileData {
             this.plots_unlocked = plots_unlocked;
     }
     
-
-    public int getMoney()
-    {
+    /**
+     * Gets the money of the player
+     * @return The amount
+     */
+    public int getMoney() {
         return money;
     }
-    
-    public int getPlantsGrown()
-    {
+
+    /**
+     * Gets the player's plants grown
+     * @return The number
+     */
+    public int getPlantsGrown() {
         return plants_grown;
+    }
+    
+    /**
+     * Transforms this PlayerData into a HighScore to be compared and replace the old one
+     * @return This PlayerData as a Highscore
+     */
+    public HighScore ToHighScore() {
+        return new HighScore(money, plants_grown);
     }
 
     @Override
@@ -58,5 +67,10 @@ public class PlayerData extends FileData {
         money = Integer.parseInt(properties[0]);
         plants_grown = Integer.parseInt(properties[1]);
         plots_unlocked = Integer.parseInt(properties[2]);
+    }
+
+    @Override
+    protected String GetFileName() {
+        return Constants.SaveFile;
     }
 }
