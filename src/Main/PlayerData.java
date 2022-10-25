@@ -8,11 +8,21 @@ package Main;
  *
  * @author Julia
  */
-public class PlayerData {
+public class PlayerData extends FileData {
     
     private int money;
     private int plants_grown;
     private int plots_unlocked;
+    
+    /**
+     * Default constructor for blank PlayerData
+     */
+    public PlayerData() {
+        money = 0;
+        plants_grown = 0;
+        plots_unlocked = 0;
+    }
+    
    /**
    * The default constructor of Playerdata.
    * Sets all init values to zero
@@ -43,6 +53,16 @@ public class PlayerData {
     // used in StartScreen -- btnContinueActionPerformed()
     public void loadPlayer(){
         
+    }
+
+    @Override
+    protected String ToFileString() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    protected void ParseFileString(String data) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 
