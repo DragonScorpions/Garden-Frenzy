@@ -8,7 +8,7 @@ package Main;
  *
  * @author Julia
  */
-public class PlayerData {
+public class PlayerData extends FileData {
     
     private int money;
     private int plants_grown;
@@ -53,6 +53,16 @@ public class PlayerData {
     // used in StartScreen -- btnContinueActionPerformed()
     public void loadPlayer(){
         
+    }
+
+    @Override
+    protected String ToFileString() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    protected void ParseFileString(String data) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 
