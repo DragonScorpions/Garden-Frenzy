@@ -5,9 +5,10 @@
 package Main;
 
 /**
- *
- * @author xande
+ * Contains the constants of the program
+ * @author Xander
  */
 public class Constants {
     public static final String SaveFile = "save";
+    public static final String HighScoreFile = "hs";
 }

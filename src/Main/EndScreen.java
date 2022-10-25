@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Main;
 
 /**
@@ -19,13 +15,33 @@ public class EndScreen extends javax.swing.JFrame {
     public EndScreen(PlayerData player) {
         this.player = player;
         initComponents();
-        DetermineHighScore(player);
+        
+        // Saves the current HighScore to file
+        HighScore curH = DetermineHighScore(player);
+        curH.SaveToFile();
     }
     
-    private void DetermineHighScore(PlayerData player){
-        // compare the current and previous score
-        // call filemanager to save the newest highscore
+    /**
+     * Compares new to old HighScore, the higher one being the one that has the 
+     * most money, or most plants grown if money is equal.
+     * @param player The current PlayerData to get the potential new HighScore from
+     * @return The current HighScore
+     */
+    private HighScore DetermineHighScore(PlayerData player){
+        HighScore newHS = player.ToHighScore();
+        HighScore oldHS = new HighScore();
+        
+        oldHS.LoadFromFile();
+        
+        if (newHS.getMoney() > oldHS.getMoney())
+            return newHS;
+        
+        if (newHS.getPlantsGrown() > oldHS.getPlantsGrown())
+            return newHS;
+        
+        return oldHS;
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
