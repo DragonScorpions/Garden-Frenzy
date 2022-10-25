@@ -5,27 +5,44 @@
 package Main;
 
 /**
- * Testing Testing Testing Testing Testing
  * @author Julia
  */
 public class StartScreen extends javax.swing.JFrame {
 
-    
+
+    PlayerData player;
+    HighScore highscore;
+
     /**
      * Creates new form StartScreen
      */
     
     public StartScreen() {
         //create blank player
+
         
         
         // Load highscore from file if it exists
         
-        initComponents();
+        
         // displayHighScore.setText("<html>HIGH SCORE<br/>Amount made: " + highscore.getMoney() + "<br/>Crops Grown: " + highscore.getPlantsGrown() + "</html>");
         
         // Enable continue if save file exists
         
+
+        highscore = new HighScore();
+        player = new PlayerData();
+        
+        // Load highscore from file if it exists
+        if (highscore.FileExists())
+            highscore.LoadFromFile();
+        
+        initComponents();
+        displayHighScore.setText("<html>HIGH SCORE<br/>Amount made: " + highscore.getMoney() + "<br/>Crops Grown: " + highscore.getPlantsGrown() + "</html>");
+        
+        // Enable continue if save file exists
+        btnContinue.setEnabled(player.FileExists());
+
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -99,14 +116,23 @@ public class StartScreen extends javax.swing.JFrame {
 
     private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewGameActionPerformed
         // Creating new session 
-        
+
+        GameScreen gameScreen = new GameScreen(player);
+        gameScreen.show();
+       
+        player = null;
         dispose();
     }//GEN-LAST:event_btnNewGameActionPerformed
 
     private void btnContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinueActionPerformed
         // player is continuing old session
         // load old gamestate from file
+
+        player.LoadFromFile();
+        GameScreen gameScreen = new GameScreen(player);
+        gameScreen.show();
         
+        player = null;
         dispose();
     }//GEN-LAST:event_btnContinueActionPerformed
 
