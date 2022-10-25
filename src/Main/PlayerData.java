@@ -21,6 +21,7 @@ public class PlayerData extends FileData {
         money = 0;
         plants_grown = 0;
         plots_unlocked = 0;
+        
     }
     
    /**
@@ -34,6 +35,7 @@ public class PlayerData extends FileData {
             this.money = money;
             this.plants_grown = plants_grown;
             this.plots_unlocked = plots_unlocked;
+            String test = "This was added by ian on 10/25";
     }
     
 
