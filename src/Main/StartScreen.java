@@ -14,6 +14,7 @@ public class StartScreen extends javax.swing.JFrame {
     HighScore highscore;
 
     /**
+     * TESTING TESTING TESTING
      * Creates new form StartScreen
      */
     
