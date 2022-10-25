@@ -13,6 +13,16 @@ public class PlayerData {
     private int money;
     private int plants_grown;
     private int plots_unlocked;
+    
+    /**
+     * Default constructor for blank PlayerData
+     */
+    public PlayerData() {
+        money = 0;
+        plants_grown = 0;
+        plots_unlocked = 0;
+    }
+    
    /**
    * The default constructor of Playerdata.
    * Sets all init values to zero
