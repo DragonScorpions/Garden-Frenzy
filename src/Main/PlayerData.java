@@ -6,11 +6,10 @@ package Main;
  * @author Julia and Xander
  */
 public class PlayerData extends FileData {
-
     private int money;
     private int plants_grown;
     private int plots_unlocked;
-
+  
     /**
      * Default constructor for blank PlayerData
      */
@@ -30,6 +29,7 @@ public class PlayerData extends FileData {
             this.money = money;
             this.plants_grown = plants_grown;
             this.plots_unlocked = plots_unlocked;
+            String test = "This was added by ian on 10/25";
     }
     
     /**
