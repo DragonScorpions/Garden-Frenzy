@@ -9,7 +9,7 @@ public class PlayerData extends FileData {
     private int money;
     private int plants_grown;
     private int plots_unlocked;
-  
+    public Plot[] plots = new Plot[9];
     /**
      * Default constructor for blank PlayerData
      */
@@ -17,6 +17,17 @@ public class PlayerData extends FileData {
         money = 0;
         plants_grown = 0;
         plots_unlocked = 0;
+        //initialize plots - make this a function later
+        for(int i =0;i<9;i++)
+        {
+            plots[i] = new Plot();
+        }
+        //DEBUG: delete below me
+        
+        
+        plots[0].tiles[0].currentSeed = "Wheat";
+        plots[0].tiles[1].currentSeed = "Pumpkin";
+        plots[0].tiles[2].currentSeed = "Watermelon";
     }
     
    /**
