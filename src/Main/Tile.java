@@ -11,10 +11,10 @@ import java.util.Map;
  */
 public class Tile {
     
-    String currentSeed; //The current seed this tile holds
-    boolean enabled; //Can the user interact with this tile?
-    int growth_stage; //What state of growth is the seed in?
-    float time_since_growth; //When was the last time growth stage was updated?
+    public String currentSeed; //The current seed this tile holds
+    private boolean enabled; //Can the user interact with this tile?
+    private int growth_stage; //What state of growth is the seed in?
+    private float time_since_growth; //When was the last time growth stage was updated?
                       //In seconds from game start
                       //(min=0=game start, max=game end time in seconds)
     
