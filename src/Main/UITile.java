@@ -37,6 +37,11 @@ public class UITile extends javax.swing.JPanel {
         CenterLabel = new javax.swing.JLabel();
         CButton = new javax.swing.JButton();
 
+        setMaximumSize(new java.awt.Dimension(75, 75));
+        setMinimumSize(new java.awt.Dimension(75, 75));
+        setName(""); // NOI18N
+        setPreferredSize(new java.awt.Dimension(75, 75));
+
         CenterLabel.setText("jLabel1");
 
         CButton.setText("Click me!");
@@ -57,21 +62,17 @@ public class UITile extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(CenterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(CButton)))
+                    .addComponent(CenterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(CenterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(CenterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CButton)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
