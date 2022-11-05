@@ -6,8 +6,11 @@
     <Property name="bounds" type="java.awt.Rectangle" editor="org.netbeans.beaninfo.editors.RectangleEditor">
       <Rectangle value="[0, 0, 640, 480]"/>
     </Property>
+    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[557, 638]"/>
+    </Property>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[640, 640]"/>
+      <Dimension value="[557, 638]"/>
     </Property>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
@@ -30,19 +33,39 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-              <Component id="uITile1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnEndScreen" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="uITile2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="uITile3" min="-2" max="-2" attributes="0"/>
+                      <Component id="uIPlot7" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="uIPlot8" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="uIPlot9" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="uIPlot1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                          <Component id="uIPlot2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="uIPlot3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="btnEndScreen" alignment="1" min="-2" pref="234" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="uIPlot4" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="uIPlot5" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="uIPlot6" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -50,14 +73,26 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="uITile1" min="-2" max="-2" attributes="0"/>
-                  <Component id="uITile2" min="-2" max="-2" attributes="0"/>
-                  <Component id="uITile3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="uIPlot1" min="-2" max="-2" attributes="0"/>
+                  <Component id="uIPlot2" min="-2" max="-2" attributes="0"/>
+                  <Component id="uIPlot3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="139" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="uIPlot4" min="-2" max="-2" attributes="0"/>
+                  <Component id="uIPlot5" min="-2" max="-2" attributes="0"/>
+                  <Component id="uIPlot6" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="uIPlot7" min="-2" max="-2" attributes="0"/>
+                  <Component id="uIPlot8" min="-2" max="-2" attributes="0"/>
+                  <Component id="uIPlot9" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="37" max="32767" attributes="0"/>
               <Component id="btnEndScreen" min="-2" pref="60" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,11 +106,23 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEndScreenActionPerformed"/>
       </Events>
     </Component>
-    <Component class="Main.UITile" name="uITile1">
+    <Component class="Main.UIPlot" name="uIPlot1">
     </Component>
-    <Component class="Main.UITile" name="uITile2">
+    <Component class="Main.UIPlot" name="uIPlot2">
     </Component>
-    <Component class="Main.UITile" name="uITile3">
+    <Component class="Main.UIPlot" name="uIPlot3">
+    </Component>
+    <Component class="Main.UIPlot" name="uIPlot4">
+    </Component>
+    <Component class="Main.UIPlot" name="uIPlot5">
+    </Component>
+    <Component class="Main.UIPlot" name="uIPlot6">
+    </Component>
+    <Component class="Main.UIPlot" name="uIPlot7">
+    </Component>
+    <Component class="Main.UIPlot" name="uIPlot8">
+    </Component>
+    <Component class="Main.UIPlot" name="uIPlot9">
     </Component>
   </SubComponents>
 </Form>
