@@ -60,6 +60,18 @@ public class Tile {
         enabled= true;
     }
     
+    public boolean getEnabled(){
+        return enabled;
+    }
+    
+    public int getGrowthStage(){
+        return growth_stage;
+    }
+    
+    public float getTimeSinceGrowth(){
+        return time_since_growth;
+    }
+    
    /**
    * Harvests the seed, giving money to player and resetting tile.
    * Checks the seed against the seed dictionary, and gives money to the player

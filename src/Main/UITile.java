@@ -17,12 +17,13 @@ public class UITile extends javax.swing.JPanel {
     private Tile tile;
     
     public UITile() {
+        setTile(tile);
         initComponents();
     }
     
     public void setTile(Tile tile)
     {
-        this.tile = tile;
+        this.tile = new Tile();
     }
 
     /**
@@ -42,14 +43,10 @@ public class UITile extends javax.swing.JPanel {
         setName(""); // NOI18N
         setPreferredSize(new java.awt.Dimension(75, 75));
 
+        CenterLabel.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
         CenterLabel.setText("jLabel1");
 
         CButton.setText("Click me!");
-        CButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CButtonMouseClicked(evt);
-            }
-        });
         CButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CButtonActionPerformed(evt);
@@ -77,13 +74,13 @@ public class UITile extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CButtonActionPerformed
-        // TODO add your handling code here:
+        CenterLabel.setText(
+                "<html>" + 
+                tile.currentSeed + "<br/>" +
+                String.valueOf(tile.getEnabled()) + "<br/>"+
+                String.valueOf(tile.getGrowthStage()) + "<br/>"+
+                String.valueOf(tile.getTimeSinceGrowth()) + "</html>");
     }//GEN-LAST:event_CButtonActionPerformed
-
-    private void CButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CButtonMouseClicked
-        CenterLabel.setText(tile.currentSeed);
-        
-    }//GEN-LAST:event_CButtonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
