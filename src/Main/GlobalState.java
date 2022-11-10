@@ -11,4 +11,5 @@ package Main;
  */
 public class GlobalState {
     public static String SelectedSeed = "Harvest";
+    public static PlayerData Player = null;
 }

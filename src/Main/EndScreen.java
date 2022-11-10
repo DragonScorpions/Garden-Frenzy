@@ -9,19 +9,16 @@ import javax.swing.JFrame;
  */
 public class EndScreen extends javax.swing.JFrame {
 
-    PlayerData player;
     /**
-     * @param player
      * Creates new form EndScreen
      */
-    public EndScreen(PlayerData player) {
-        this.player = player;
+    public EndScreen() {
         initComponents();
         this.setLocationRelativeTo(null); // center screen
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         // Saves the current HighScore to file
-        HighScore curH = DetermineHighScore(player);
+        HighScore curH = DetermineHighScore(GlobalState.Player);
         curH.SaveToFile();
     }
     
@@ -112,8 +109,8 @@ public class EndScreen extends javax.swing.JFrame {
 
     private void btnPlayAgainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayAgainActionPerformed
         
-        player = new PlayerData(); // create blank player data
-        GameScreen gameScreen = new GameScreen(player);
+        GlobalState.Player = new PlayerData(); // create blank player data
+        GameScreen gameScreen = new GameScreen();
         gameScreen.show();
         
         dispose();
@@ -125,7 +122,6 @@ public class EndScreen extends javax.swing.JFrame {
 
     private void btnStartScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartScreenActionPerformed
         
-        player = null;
         StartScreen startScreen = new StartScreen();
         startScreen.show();
         
