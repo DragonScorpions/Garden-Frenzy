@@ -17,6 +17,17 @@ public class UIPlot extends javax.swing.JPanel {
     public UIPlot() {
         initComponents();
     }
+    
+    //Prepare each tile within the plot with new seedToPlant that will be
+    //planted when they are clicked on. Gets each tile 
+    //inside the plot and sets their new seed that will be planted
+    public void prepareTilePlants(String seed)
+    {
+        uITile1.prepareNewSeed(seed);
+        uITile2.prepareNewSeed(seed);
+        uITile3.prepareNewSeed(seed);
+        uITile4.prepareNewSeed(seed);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -15,17 +15,25 @@ public class UITile extends javax.swing.JPanel {
      * Creates new form UITile
      */
     private Tile tile;
+    private String seedToPlant = "Harvest";
     
     public UITile() {
         setTile(tile);
-        initComponents();
+        initComponents(); //auto-generated, dont mess with me
     }
     
+    //Init function that initializes the tile to be empty
     public void setTile(Tile tile)
     {
         this.tile = new Tile();
     }
 
+    //Changes the seed that will be planted when this tile is clicked
+    public void prepareNewSeed(String seed)
+    {
+        seedToPlant = seed;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,6 +53,11 @@ public class UITile extends javax.swing.JPanel {
 
         CenterLabel.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
         CenterLabel.setText("jLabel1");
+        CenterLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CenterLabelMouseClicked(evt);
+            }
+        });
 
         CButton.setText("Click me!");
         CButton.addActionListener(new java.awt.event.ActionListener() {
@@ -74,15 +87,42 @@ public class UITile extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CButtonActionPerformed
+
         CenterLabel.setText(
                 "<html>" + 
                 tile.currentSeed + "<br/>" +
                 String.valueOf(tile.getEnabled()) + "<br/>"+
                 String.valueOf(tile.getGrowthStage()) + "<br/>"+
                 String.valueOf(tile.getTimeSinceGrowth()) + "</html>");
+                
     }//GEN-LAST:event_CButtonActionPerformed
 
+    
+    //When the text is clicked, do what?
+    private void CenterLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CenterLabelMouseClicked
 
+       PlantSeed();
+    }//GEN-LAST:event_CenterLabelMouseClicked
+
+    //Set the newest current seed
+    //TODO: check that another seed isn't already taking up space
+    private void PlantSeed()
+    {
+        System.out.println("UITile: " + seedToPlant + " planted!");
+        if(seedToPlant != "Harvest")
+            tile.currentSeed = seedToPlant;
+        else
+            HarvestSeed();
+    }
+    
+    //Harvest the current seed of the tile
+    //TODO: get worth of seed and add to player wallet
+    private void HarvestSeed()
+    {
+        System.out.println("UITile: " + tile.currentSeed + " would be harvested");
+        tile.currentSeed = "None";
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CButton;
     private javax.swing.JLabel CenterLabel;
