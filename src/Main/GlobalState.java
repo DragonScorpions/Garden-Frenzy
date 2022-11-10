@@ -1,15 +1,20 @@
 package Main;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 /**
- *
- * @author extre
+ * Contains the global state of the game
+ * @author Xander
  */
-public class GlobalState {
+public final class GlobalState {
+    /**
+     * The name of the currently selected seed
+     */
     public static String SelectedSeed = "Harvest";
+    
+    /**
+     * The player data of the currently running game
+     */
     public static PlayerData Player = null;
+    
+    // Don't make instances of this class
+    private GlobalState() {}
 }
