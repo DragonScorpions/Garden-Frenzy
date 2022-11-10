@@ -9,11 +9,11 @@ package Main;
  * @author Ian
  */
 public class Plot {
-    public Tile[] tiles = new Tile[9];
+    public Tile[] tiles = new Tile[4];
     
     public Plot()
     {
-        for(int i=0;i<9;i++)
+        for(int i=0;i<4;i++)
         {
             tiles[i] = new Tile();
         }

@@ -1,5 +1,7 @@
 package Main;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Julia
@@ -15,6 +17,8 @@ public class EndScreen extends javax.swing.JFrame {
     public EndScreen(PlayerData player) {
         this.player = player;
         initComponents();
+        this.setLocationRelativeTo(null); // center screen
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         // Saves the current HighScore to file
         HighScore curH = DetermineHighScore(player);
@@ -56,6 +60,7 @@ public class EndScreen extends javax.swing.JFrame {
         btnStartScreen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         btnPlayAgain.setText("Play Again");
         btnPlayAgain.addActionListener(new java.awt.event.ActionListener() {

@@ -4,6 +4,8 @@
  */
 package Main;
 
+import javax.swing.JFrame;
+
 /**
  * Testing From New Branch
  * @author Julia
@@ -17,6 +19,7 @@ public class StartScreen extends javax.swing.JFrame {
      */
     
     public StartScreen() {
+        
         //create blank player
         highscore = new HighScore();
         player = new PlayerData();
@@ -26,6 +29,8 @@ public class StartScreen extends javax.swing.JFrame {
             highscore.LoadFromFile();
         
         initComponents();
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null); // Center Screen
         displayHighScore.setText("<html>HIGH SCORE<br/>Amount made: " + highscore.getMoney() + "<br/>Crops Grown: " + highscore.getPlantsGrown() + "</html>");
         
         // Enable continue if save file exists
