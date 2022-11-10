@@ -24,10 +24,7 @@ public class GameScreen extends javax.swing.JFrame {
         this.player = player;
         initComponents(); //Generated code
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null); // Center Screen
-        //uITile1.setTile(player.plots[0].tiles[0]);
-        //uITile2.setTile(player.plots[0].tiles[1]);
-        //uITile3.setTile(player.plots[0].tiles[2]);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -142,22 +139,14 @@ public class GameScreen extends javax.swing.JFrame {
     //Pumpkin shop button
     private void Pumpkin_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pumpkin_ButtonActionPerformed
         System.out.println("Pumpkin selected!");
-        preparePlotsForPlants("pumpkin");
+        GlobalState.SelectedSeed = "Pumpkin";
     }//GEN-LAST:event_Pumpkin_ButtonActionPerformed
 
     //Get each plot and have them prepare their tiles for the 
     //new seed that is about to be planted.
     private void preparePlotsForPlants(String seed)
     {
-        uIPlot1.prepareTilePlants(seed);
-        uIPlot2.prepareTilePlants(seed);
-        uIPlot3.prepareTilePlants(seed);
-        uIPlot4.prepareTilePlants(seed);
-        uIPlot5.prepareTilePlants(seed);
-        uIPlot6.prepareTilePlants(seed);
-        uIPlot7.prepareTilePlants(seed);
-        uIPlot8.prepareTilePlants(seed);
-        uIPlot9.prepareTilePlants(seed);
+        GlobalState.SelectedSeed = seed;
     }
     
     /**

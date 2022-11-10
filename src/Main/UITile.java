@@ -31,7 +31,7 @@ public class UITile extends javax.swing.JPanel {
     //Changes the seed that will be planted when this tile is clicked
     public void prepareNewSeed(String seed)
     {
-        seedToPlant = seed;
+        //seedToPlant = seed;
     }
     
     /**
@@ -108,9 +108,12 @@ public class UITile extends javax.swing.JPanel {
     //TODO: check that another seed isn't already taking up space
     private void PlantSeed()
     {
-        System.out.println("UITile: " + seedToPlant + " planted!");
-        if(seedToPlant != "Harvest")
-            tile.currentSeed = seedToPlant;
+        
+        if(!GlobalState.SelectedSeed.equals("Harvest"))
+        {
+            System.out.println("UITile: " + GlobalState.SelectedSeed + " planted!");
+            tile.currentSeed = GlobalState.SelectedSeed;
+        }
         else
             HarvestSeed();
     }
