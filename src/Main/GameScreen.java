@@ -12,16 +12,13 @@ import javax.swing.JFrame;
  */
 public class GameScreen extends javax.swing.JFrame {
 
-    PlayerData player;
     /**
      * Creates new form GameScreen
-     * @param player
      */
-    public GameScreen(PlayerData player) {
+    public GameScreen() {
         
         //copy player
         boolean buyMode;
-        this.player = player;
         initComponents(); //Generated code
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
@@ -129,10 +126,9 @@ public class GameScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEndScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndScreenActionPerformed
-        EndScreen endScreen = new EndScreen(player);
+        EndScreen endScreen = new EndScreen();
         endScreen.show();
         
-        player = null;
         dispose();
     }//GEN-LAST:event_btnEndScreenActionPerformed
 

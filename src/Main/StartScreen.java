@@ -12,7 +12,6 @@ import javax.swing.JFrame;
  */
 public class StartScreen extends javax.swing.JFrame {
 
-    PlayerData player;
     HighScore highscore;
     /**
      * Creates new form StartScreen
@@ -22,7 +21,7 @@ public class StartScreen extends javax.swing.JFrame {
         
         //create blank player
         highscore = new HighScore();
-        player = new PlayerData();
+        GlobalState.Player = new PlayerData();
         
         // Load highscore from file if it exists
         if (highscore.FileExists())
@@ -34,7 +33,7 @@ public class StartScreen extends javax.swing.JFrame {
         displayHighScore.setText("<html>HIGH SCORE<br/>Amount made: " + highscore.getMoney() + "<br/>Crops Grown: " + highscore.getPlantsGrown() + "</html>");
         
         // Enable continue if save file exists
-        btnContinue.setEnabled(player.FileExists());
+        btnContinue.setEnabled(GlobalState.Player.FileExists());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -108,21 +107,19 @@ public class StartScreen extends javax.swing.JFrame {
 
     private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewGameActionPerformed
         // Creating new session 
-        GameScreen gameScreen = new GameScreen(player);
+        GameScreen gameScreen = new GameScreen();
         gameScreen.show();
        
-        player = null;
         dispose();
     }//GEN-LAST:event_btnNewGameActionPerformed
 
     private void btnContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinueActionPerformed
         // player is continuing old session
         // load old gamestate from file
-        player.LoadFromFile();
-        GameScreen gameScreen = new GameScreen(player);
+        GlobalState.Player.LoadFromFile();
+        GameScreen gameScreen = new GameScreen();
         gameScreen.show();
         
-        player = null;
         dispose();
     }//GEN-LAST:event_btnContinueActionPerformed
 
