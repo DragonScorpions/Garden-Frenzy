@@ -27,6 +27,6 @@ public final class Constants {
         "Corn", new Seed(3, 10, 2)
     );
     
-    // Don't make instances of this class
+    // Static class, don't make instances of this class
     private Constants() {}
 }
