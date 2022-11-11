@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Main;
 
 import javax.swing.JFrame;
@@ -11,20 +7,25 @@ import javax.swing.JFrame;
  * @author Julia
  */
 public class GameScreen extends javax.swing.JFrame {
-
-    PlayerData player;
     /**
      * Creates new form GameScreen
-     * @param player
      */
-    public GameScreen(PlayerData player) {
-        
-        //copy player
-        boolean buyMode;
-        this.player = player;
+    public GameScreen() {
         initComponents(); //Generated code
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
+        
+        // Reset selected seed to initial
+        GlobalState.SelectedSeed = "Harvest";
+        
+        // Populate UI with PlayerData
+        UIPlot[] plots = { uIPlot1, uIPlot2, uIPlot3, uIPlot4, uIPlot5, uIPlot6, uIPlot7, uIPlot8, uIPlot9 };
+        for (int p = 0; p < Constants.NumPlots; p++)
+            plots[p].SetPlot(GlobalState.Player.plots[p]);
+        
+        // Set up timer and start
+        Timer.SetUpdateListener(this::Update);
+        Timer.Start();
     }
 
     /**
@@ -47,6 +48,7 @@ public class GameScreen extends javax.swing.JFrame {
         uIPlot8 = new Main.UIPlot();
         uIPlot9 = new Main.UIPlot();
         Pumpkin_Button = new javax.swing.JButton();
+        btnSaveAndExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 640, 480));
@@ -65,6 +67,13 @@ public class GameScreen extends javax.swing.JFrame {
         Pumpkin_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Pumpkin_ButtonActionPerformed(evt);
+            }
+        });
+
+        btnSaveAndExit.setText("Save & Exit");
+        btnSaveAndExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveAndExitActionPerformed(evt);
             }
         });
 
@@ -95,8 +104,10 @@ public class GameScreen extends javax.swing.JFrame {
                         .addComponent(uIPlot6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(btnEndScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
+                        .addComponent(btnEndScreen)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSaveAndExit)
+                        .addGap(70, 70, 70)
                         .addComponent(Pumpkin_Button)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -121,7 +132,8 @@ public class GameScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEndScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Pumpkin_Button))
+                    .addComponent(Pumpkin_Button)
+                    .addComponent(btnSaveAndExit, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
         );
 
@@ -129,10 +141,11 @@ public class GameScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEndScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndScreenActionPerformed
-        EndScreen endScreen = new EndScreen(player);
-        endScreen.show();
+        Timer.Stop();
         
-        player = null;
+        EndScreen endScreen = new EndScreen();
+        endScreen.setVisible(true);
+        
         dispose();
     }//GEN-LAST:event_btnEndScreenActionPerformed
 
@@ -142,22 +155,30 @@ public class GameScreen extends javax.swing.JFrame {
         GlobalState.SelectedSeed = "Pumpkin";
     }//GEN-LAST:event_Pumpkin_ButtonActionPerformed
 
-    //Get each plot and have them prepare their tiles for the 
-    //new seed that is about to be planted.
-    private void preparePlotsForPlants(String seed)
-    {
-        GlobalState.SelectedSeed = seed;
-    }
+    private void btnSaveAndExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveAndExitActionPerformed
+        GlobalState.Player.SaveToFile();
+        
+        Timer.Stop();
+        
+        StartScreen startScreen = new StartScreen();
+        startScreen.setVisible(true);
+        
+        dispose();
+    }//GEN-LAST:event_btnSaveAndExitActionPerformed
     
     /**
-     * @param args the command line arguments
+     * The update function of the game
+     * @param time Time since the beginning of the game in seconds
      */
-    
-
+    private void Update(float time) {
+        // TODO: implement update function
+        System.out.println(time);
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Pumpkin_Button;
     private javax.swing.JButton btnEndScreen;
+    private javax.swing.JButton btnSaveAndExit;
     private Main.UIPlot uIPlot1;
     private Main.UIPlot uIPlot2;
     private Main.UIPlot uIPlot3;

@@ -17,6 +17,12 @@ public class UIPlot extends javax.swing.JPanel {
     public UIPlot() {
         initComponents();
     }
+    
+    public void SetPlot(Plot plot) {
+        UITile[] tiles = { uITile1, uITile2, uITile3, uITile4 };
+        for(int t = 0; t < Constants.TilesPerPlot; t++)
+            tiles[t].SetTile(plot.tiles[t]);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

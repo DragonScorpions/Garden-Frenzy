@@ -15,17 +15,14 @@ public class UITile extends javax.swing.JPanel {
      * Creates new form UITile
      */
     private Tile tile;
-    private String seedToPlant = "Harvest";
     
     public UITile() {
-        setTile(tile);
         initComponents(); //auto-generated, dont mess with me
     }
     
     //Init function that initializes the tile to be empty
-    public void setTile(Tile tile)
-    {
-        this.tile = new Tile();
+    public void SetTile(Tile tile) {
+        this.tile = tile;
     }
 
     //Changes the seed that will be planted when this tile is clicked

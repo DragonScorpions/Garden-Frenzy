@@ -9,7 +9,7 @@ package Main;
  * @author Ian
  */
 public class Plot {
-    public Tile[] tiles = new Tile[4];
+    public Tile[] tiles = new Tile[Constants.TilesPerPlot];
     
     public Plot()
     {
