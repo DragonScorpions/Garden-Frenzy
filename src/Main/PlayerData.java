@@ -9,7 +9,8 @@ public class PlayerData extends FileData {
     private int money;
     private int plants_grown;
     private int plots_unlocked;
-    public Plot[] plots = new Plot[9];
+    public Plot[] plots = new Plot[Constants.NumPlots];
+    
     /**
      * Default constructor for blank PlayerData
      */
@@ -19,28 +20,7 @@ public class PlayerData extends FileData {
         plots_unlocked = 0;
         //initialize plots - make this a function later
         for(int i =0;i<9;i++)
-        {
             plots[i] = new Plot();
-        }
-        //DEBUG: delete below me
-        
-        
-        plots[0].tiles[0].currentSeed = "Wheat";
-        plots[0].tiles[1].currentSeed = "Pumpkin";
-        plots[0].tiles[2].currentSeed = "Watermelon";
-    }
-    
-   /**
-   * The default constructor of PlayerData.
-   * @param money (int) How much money the player has.  
-   * @param plants_grown  (int) How many plants total has the player grown.
-   * @param plots_unlocked (int) How many plots has the player unlocked
-   */
-    public PlayerData(int money, int plants_grown, int plots_unlocked){
-            this.money = money;
-            this.plants_grown = plants_grown;
-            this.plots_unlocked = plots_unlocked;
-            String test = "This was added by ian on 10/25";
     }
     
     /**
@@ -61,7 +41,7 @@ public class PlayerData extends FileData {
     
     /**
      * Transforms this PlayerData into a HighScore to be compared and replace the old one
-     * @return This PlayerData as a Highscore
+     * @return This PlayerData as a HighScore
      */
     public HighScore ToHighScore() {
         return new HighScore(money, plants_grown);
@@ -69,15 +49,32 @@ public class PlayerData extends FileData {
 
     @Override
     protected String ToFileString() {
-        return money + ", " + plants_grown + ", " + plots_unlocked;
+        String fileString = money + ", " + plants_grown + ", " + plots_unlocked + ", " + Timer.GetTime() + "\n";
+        
+        for(int p = 0; p < Constants.NumPlots; p++) {
+            for(int t = 0; t < Constants.TilesPerPlot; t++) {
+                fileString += plots[p].tiles[t].ToSaveString() + "\n";
+            }
+        }
+            
+        return fileString;
     }
 
     @Override
     protected void ParseFileString(String data) {
-        String[] properties = data.split(", ");
-        money = Integer.parseInt(properties[0]);
-        plants_grown = Integer.parseInt(properties[1]);
-        plots_unlocked = Integer.parseInt(properties[2]);
+        String[] properties = data.split("\n");
+        
+        String[] fields = properties[0].split(", ");
+        money = Integer.parseInt(fields[0]);
+        plants_grown = Integer.parseInt(fields[1]);
+        plots_unlocked = Integer.parseInt(fields[2]);
+        Timer.SetTime(Float.parseFloat(fields[3]));
+        
+        for(int p = 0, i = 1; p < Constants.NumPlots; p++) {
+            for(int t = 0; t < Constants.TilesPerPlot; t++) {
+                plots[p].tiles[t].FromSaveString(properties[i++]);
+            }
+        }
     }
 
     @Override

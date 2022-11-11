@@ -33,4 +33,7 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-# test
+
+# Generated files
+save
+hs
