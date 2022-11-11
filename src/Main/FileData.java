@@ -2,6 +2,7 @@ package Main;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
@@ -38,6 +39,20 @@ public abstract class FileData {
             ParseFileString(Files.readString(Paths.get(fileName)));
         } catch(IOException e) {
             System.err.println("Could not read from file \"" + fileName + "\": " + e.getMessage());
+        }
+    }
+    
+    /**
+     * Deletes the file that store this data
+     */
+    public void DeleteFile() {
+        String fileName = GetFileName();
+        try {
+            Path path = Paths.get(fileName);
+            if (Files.exists(path))
+                Files.delete(path);
+        } catch (IOException e) {
+            System.err.println("Could not delete file \"" + fileName + "\": " + e.getMessage());
         }
     }
     

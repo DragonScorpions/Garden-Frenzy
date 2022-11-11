@@ -27,6 +27,16 @@ public final class Constants {
         "Corn", new Seed(3, 10, 2)
     );
     
+    /**
+     * The number of plots in a game
+     */
+    public static final int NumPlots = 9;
+    
+    /**
+     * The number of tiles per plot
+     */
+    public static final int TilesPerPlot = 4;
+    
     // Static class, don't make instances of this class
     private Constants() {}
 }

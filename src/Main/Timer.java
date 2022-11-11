@@ -8,7 +8,7 @@ public final class Timer {
     // The milliseconds per update
     private static final int mpu = 17;
     // The seconds per update
-    private static final float spu = mpu/1000f;
+    private static final float spu = mpu / 1000f;
     
     // The java timer that is used as the underlying implementation
     private static java.util.Timer javaTimer;
@@ -26,17 +26,15 @@ public final class Timer {
     public static void SetUpdateListener(UpdateListener listener) {
         updateListener = listener;
     }
-    
+
     /**
-     * Resets the time, and starts the timer loop
+     * Starts the timer loop
      */
     public static void Start() {
-        time = 0;
-        
         // Need to create a new timer every time because a canceled timer can't
         // be started again.
-        javaTimer  = new java.util.Timer(true);
-        
+        javaTimer = new java.util.Timer(true);
+
         javaTimer.schedule(new java.util.TimerTask() {
             @Override
             public void run() {
@@ -45,16 +43,35 @@ public final class Timer {
             }
         }, 0, mpu);
     }
-    
+
     /**
-     * Stops the timer, and removes the listener, it won't notify the listener any longer
+     * Stops the timer, resets the time, and removes the listener, it won't
+     * notify the listener any longer
      */
     public static void Stop() {
         updateListener = null;
-        
+
         javaTimer.cancel();
+
+        time = 0;
     }
-    
+
+    /**
+     * Gets the time since timer start in seconds
+     * @return Time since timer start in seconds
+     */
+    public static float GetTime() {
+        return time;
+    }
+
+    /**
+     * Sets the current time, useful for loading from save file
+     * @param time The time since timer start to fake
+     */
+    public static void SetTime(float time) {
+        Timer.time = time;
+    }
+
     /**
      * A listener for the Timer updates
      */

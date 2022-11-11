@@ -14,8 +14,7 @@ public class Tile {
                       //In seconds from game start
                       //(min=0=game start, max=game end time in seconds)
     
-    public Tile()
-    {
+    public Tile() {
         currentSeed = "None";
         enabled = false;
         growth_stage = 0;
@@ -26,9 +25,8 @@ public class Tile {
         enabled = false;
     }
     
-    public void enable()
-    {
-        enabled= true;
+    public void enable() {
+        enabled = true;
     }
     
     public boolean getEnabled(){
@@ -126,5 +124,25 @@ public class Tile {
    */
     public void Update(float cur_time){
         calcProgress(cur_time);
+    }
+    
+    /**
+     * Makes a string from the Tile state that can be recovered from later
+     * @return Tile as a string
+     */
+    public String ToSaveString() {
+        return currentSeed + ", " + enabled + ", " + growth_stage + ", " + time_since_growth;
+    }
+    
+    /**
+     * Recovers state of Tile from string
+     * @param data The string to recover from
+     */
+    public void FromSaveString(String data) {
+        String[] fields = data.split(", ");
+        currentSeed = fields[0];
+        enabled = Boolean.parseBoolean(fields[1]);
+        growth_stage = Integer.parseInt(fields[2]);
+        time_since_growth = Float.parseFloat(fields[3]);
     }
 }

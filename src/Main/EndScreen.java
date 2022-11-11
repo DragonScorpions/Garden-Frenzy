@@ -20,6 +20,9 @@ public class EndScreen extends javax.swing.JFrame {
         // Saves the current HighScore to file
         HighScore curH = DetermineHighScore(GlobalState.Player);
         curH.SaveToFile();
+        
+        // Delete 
+        GlobalState.Player.DeleteFile();
     }
     
     /**
