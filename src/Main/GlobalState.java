@@ -15,6 +15,6 @@ public final class GlobalState {
      */
     public static PlayerData Player = null;
     
-    // Don't make instances of this class
+    // Static class, don't make instances of this class
     private GlobalState() {}
 }

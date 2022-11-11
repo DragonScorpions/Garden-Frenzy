@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Main;
 
 import javax.swing.JFrame;
@@ -22,6 +18,9 @@ public class GameScreen extends javax.swing.JFrame {
         initComponents(); //Generated code
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
+        
+        Timer.SetUpdateListener(this::Update);
+        Timer.Start();
     }
 
     /**
@@ -126,6 +125,8 @@ public class GameScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEndScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndScreenActionPerformed
+        Timer.Stop();
+        
         EndScreen endScreen = new EndScreen();
         endScreen.show();
         
@@ -146,10 +147,13 @@ public class GameScreen extends javax.swing.JFrame {
     }
     
     /**
-     * @param args the command line arguments
+     * The update function of the game
+     * @param time Time since the beginning of the game in seconds
      */
-    
-
+    private void Update(float time) {
+        // TODO: implement update function
+        System.out.println(time);
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Pumpkin_Button;
