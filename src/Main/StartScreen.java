@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Main;
 
 import javax.swing.JFrame;
@@ -157,13 +153,8 @@ public class StartScreen extends javax.swing.JFrame {
 
         /* Create and display the form */
         
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                
-                new StartScreen().setVisible(true);
-                
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new StartScreen().setVisible(true);
         });
     }
 

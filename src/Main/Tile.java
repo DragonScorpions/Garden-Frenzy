@@ -1,12 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Main;
-import java.util.Map;
 
 /**
- *
+ * Encapsulates the behavior of a tile in the game, where seeds are planted and
+ * plants grow and are harvested.
  * @author Julia
  */
 public class Tile {
@@ -17,31 +13,6 @@ public class Tile {
     private float time_since_growth; //When was the last time growth stage was updated?
                       //In seconds from game start
                       //(min=0=game start, max=game end time in seconds)
-    
-    //The seed map, with each name of the seed stored with its value
-    Map<String, Integer> seed_worth = Map.of(
-    "None", 0,
-    "Pumpkin", 1,
-    "Wheat", 2,
-    "Corn", 3
-     );
-    
-    //The seed map, with each name of the seed stored with how many stages it has
-    Map<String, Integer> seed_stages = Map.of(
-    "None", 999,
-    "Pumpkin", 2,
-    "Wheat", 2,
-    "Corn", 2
-     );
-    
-    //The seed map, with each name of the seed stored with how long a stage is
-    //in seconds
-    Map<String, Integer> seed_time = Map.of(
-    "None", 999,
-    "Pumpkin", 10,
-    "Wheat", 10,
-    "Corn", 10
-     );
     
     public Tile()
     {
@@ -82,9 +53,9 @@ public class Tile {
     {
         int worth;
         //If growth state is equal to the ripe time, give player full money
-        if(growth_stage == seed_stages.get(currentSeed) )
+        if(growth_stage == Constants.Seeds.get(currentSeed).GetStages())
         {
-            worth = seed_worth.get(currentSeed); //Get the worth of the current seed
+            worth = Constants.Seeds.get(currentSeed).GetWorth(); //Get the worth of the current seed
         }
         else //If it is not ripe yet, or has spoiled, return no money. 
         {
@@ -119,7 +90,7 @@ public class Tile {
     private void updateGrowthState()
     {
         //Check if the current seed is ripe or is still growing
-        if(growth_stage <= seed_stages.get(currentSeed))
+        if(growth_stage <= Constants.Seeds.get(currentSeed).GetStages())
             growth_stage++;
         //Else, don't update. If this doesn't trigger,
         //then the growth stage will be equal to one HIGHER than its ripe stage.
@@ -140,7 +111,7 @@ public class Tile {
         
         //If the difference is equal to seed_time value, then update the current growth stage
         //and reset time_since_growth.
-        if(seed_time.get(currentSeed) >= time_difference)
+        if(Constants.Seeds.get(currentSeed).GetTime() >= time_difference)
         {
             updateGrowthState();
             time_since_growth = cur_time;
