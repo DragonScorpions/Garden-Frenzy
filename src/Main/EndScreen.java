@@ -1,5 +1,9 @@
 package Main;
 
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 /**
@@ -23,7 +27,26 @@ public class EndScreen extends javax.swing.JFrame {
         
         // Delete 
         GlobalState.Player.DeleteFile();
+        
+        JButton[] btns = {btnPlayAgain, btnStartScreen, btnQuit};
+        BorderHandler borderhandler = new BorderHandler();
+        for(JButton btn: btns){
+            btn.setContentAreaFilled(false);
+            btn.addMouseListener(new MouseAdapter(){
+                @Override
+               public void mouseEntered(java.awt.event.MouseEvent evt){
+                   borderhandler.showBorder(btn, "#ff8066", 5);
+               }
+               
+               @Override
+               public void mouseExited(java.awt.event.MouseEvent evt){
+                   borderhandler.hideBorder(btn);
+               }
+            });
+        }
+        
     }
+    
     
     /**
      * Compares new to old HighScore, the higher one being the one that has the 
@@ -54,58 +77,71 @@ public class EndScreen extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        btnPlayAgain = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         btnQuit = new javax.swing.JButton();
+        btnPlayAgain = new javax.swing.JButton();
         btnStartScreen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(573, 677));
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        btnPlayAgain.setText("Play Again");
-        btnPlayAgain.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPlayAgainActionPerformed(evt);
-            }
-        });
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        btnQuit.setText("Quit");
+        btnQuit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ExitBtn.png"))); // NOI18N
         btnQuit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuitActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = -33;
+        gridBagConstraints.ipady = -10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(41, 37, 13, 0);
+        jPanel1.add(btnQuit, gridBagConstraints);
 
-        btnStartScreen.setText("Start Screen");
+        btnPlayAgain.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/PlayAgainbtn.png"))); // NOI18N
+        btnPlayAgain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlayAgainActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = -31;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(13, 37, 0, 37);
+        jPanel1.add(btnPlayAgain, gridBagConstraints);
+
+        btnStartScreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/StartScreenbtn.png"))); // NOI18N
         btnStartScreen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnStartScreenActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = -35;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(41, 37, 0, 0);
+        jPanel1.add(btnStartScreen, gridBagConstraints);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(220, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnStartScreen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPlayAgain, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-                    .addComponent(btnQuit, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
-                .addGap(192, 192, 192))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(105, Short.MAX_VALUE)
-                .addComponent(btnPlayAgain, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(btnStartScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(btnQuit, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 25;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(171, 102, 0, 109);
+        getContentPane().add(jPanel1, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -140,5 +176,6 @@ public class EndScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnPlayAgain;
     private javax.swing.JButton btnQuit;
     private javax.swing.JButton btnStartScreen;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
