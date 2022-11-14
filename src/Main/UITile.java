@@ -1,4 +1,8 @@
 package Main;
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -17,12 +21,31 @@ public class UITile extends javax.swing.JPanel {
     private Tile tile;
     
     public UITile() {
+        
         initComponents(); //auto-generated, dont mess with me
+        ImageIcon NoSeed = new ImageIcon("src/Images/EmptyTile.png");
+        CenterLabel.setIcon(NoSeed);
+        
+        BorderHandler borderhandler = new BorderHandler();
+        CenterLabel.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt){
+                borderhandler.showBorder((UITile) CenterLabel.getParent(), "#ff8066", 1);
+                
+            }
+            
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt){
+                borderhandler.hideBorder((UITile) CenterLabel.getParent());
+            }
+        });
+          
     }
     
     //Init function that initializes the tile to be empty
     public void SetTile(Tile tile) {
         this.tile = tile;
+       
     }
 
     //Changes the seed that will be planted when this tile is clicked
@@ -54,6 +77,9 @@ public class UITile extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 CenterLabelMouseClicked(evt);
             }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                CenterLabelMouseReleased(evt);
+            }
         });
 
         CButton.setText("Click me!");
@@ -68,23 +94,21 @@ public class UITile extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CenterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(CButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(CenterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(CenterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(CenterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CButton)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void CButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CButtonActionPerformed
-
         CenterLabel.setText(
                 "<html>" + 
                 tile.currentSeed + "<br/>" +
@@ -98,8 +122,12 @@ public class UITile extends javax.swing.JPanel {
     //When the text is clicked, do what?
     private void CenterLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CenterLabelMouseClicked
 
-       PlantSeed();
+        
     }//GEN-LAST:event_CenterLabelMouseClicked
+
+    private void CenterLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CenterLabelMouseReleased
+        PlantSeed();
+    }//GEN-LAST:event_CenterLabelMouseReleased
 
     //Set the newest current seed
     //TODO: check that another seed isn't already taking up space
@@ -109,6 +137,8 @@ public class UITile extends javax.swing.JPanel {
         if(!GlobalState.SelectedSeed.equals("Harvest"))
         {
             System.out.println("UITile: " + GlobalState.SelectedSeed + " planted!");
+            ImageIcon plantedSeed = new ImageIcon("src/Images/growth_1.png");
+            CenterLabel.setIcon(plantedSeed);
             tile.currentSeed = GlobalState.SelectedSeed;
         }
         else
@@ -120,6 +150,8 @@ public class UITile extends javax.swing.JPanel {
     private void HarvestSeed()
     {
         System.out.println("UITile: " + tile.currentSeed + " would be harvested");
+        ImageIcon emptyTile = new ImageIcon("src/Images/EmptyTile.png");
+        CenterLabel.setIcon(emptyTile);
         tile.currentSeed = "None";
     }
     

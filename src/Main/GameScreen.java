@@ -37,6 +37,7 @@ public class GameScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jProgressBar1 = new javax.swing.JProgressBar();
         btnEndScreen = new javax.swing.JButton();
         uIPlot1 = new Main.UIPlot();
         uIPlot2 = new Main.UIPlot();
@@ -52,7 +53,6 @@ public class GameScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 640, 480));
-        setMaximumSize(new java.awt.Dimension(557, 638));
         setMinimumSize(new java.awt.Dimension(557, 638));
         setResizable(false);
 
@@ -179,6 +179,7 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JButton Pumpkin_Button;
     private javax.swing.JButton btnEndScreen;
     private javax.swing.JButton btnSaveAndExit;
+    private javax.swing.JProgressBar jProgressBar1;
     private Main.UIPlot uIPlot1;
     private Main.UIPlot uIPlot2;
     private Main.UIPlot uIPlot3;

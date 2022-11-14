@@ -1,5 +1,9 @@
 package Main;
-
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -15,14 +19,19 @@ public class UIPlot extends javax.swing.JPanel {
      * Creates new form UIPlot
      */
     public UIPlot() {
+        
         initComponents();
+        
     }
     
     public void SetPlot(Plot plot) {
         UITile[] tiles = { uITile1, uITile2, uITile3, uITile4 };
-        for(int t = 0; t < Constants.TilesPerPlot; t++)
+        for(int t = 0; t < Constants.TilesPerPlot; t++){
             tiles[t].SetTile(plot.tiles[t]);
+        }
     }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,7 +55,7 @@ public class UIPlot extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(uITile1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(uITile1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(uITile2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
