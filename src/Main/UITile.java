@@ -133,8 +133,10 @@ public class UITile extends javax.swing.JPanel {
     //TODO: check that another seed isn't already taking up space
     private void PlantSeed()
     {
-        HarvestSeed();
-        if(!GlobalState.SelectedSeed.equals("Harvest"))
+        //TODO: check to make sure the current tile doesn't have a seed already there
+        HarvestSeed(); //reset the seed no matter what. TODO: remove when check is added
+        
+        if(!GlobalState.SelectedSeed.equals("None")) //If the player is actually planting
         {
             
             System.out.println("UITile: " + GlobalState.SelectedSeed + " planted!");
