@@ -13,16 +13,24 @@ public class Tile {
     private float timeAtGrowth; //When was the last time growth stage was updated?
                       //In seconds from game start
                       //(min=0=game start, max=game end time in seconds)
+    private boolean rotten; //is the tile rotten?
     
     public Tile() {
         currentSeed = "None";
         enabled = false;
         growth_stage = 0;
         timeAtGrowth = 0;
+        rotten = false;
     }
     
     public void disable(){
         enabled = false;
+    }
+    
+    //returns if the current seed is rotten
+    public boolean isRotten()
+    {
+        return rotten;
     }
     
     public void enable() {
@@ -63,6 +71,7 @@ public class Tile {
         currentSeed = "None"; //Remove the seed
         growth_stage = 0; //reset the growth stage
         timeAtGrowth = Timer.GetTime();
+        rotten = false;
         return worth; // return money gained - based on growth stage
     }
     
@@ -78,6 +87,7 @@ public class Tile {
         {
             currentSeed = seed;
             timeAtGrowth = time;
+            rotten = false;
         }
     }
     
@@ -96,6 +106,10 @@ public class Tile {
         //then the growth stage will be equal to one HIGHER than its ripe stage.
         //This is intentional.
         //TODO: Maybe return the state it is in and its associated image?
+        
+        //set seed to rotten if its growth stage passed the ripe stage
+        if(growth_stage > Constants.Seeds.get(currentSeed).GetStages())
+            rotten = true;
     }
     
     /**
@@ -103,11 +117,12 @@ public class Tile {
    * Takes the time and increases seed's growth state if enough time
    * has passed.
    * @param cur_time (float) How many seconds have passed since the game started
+   * @return boolean if the tile's stage was increased
    */
     private boolean calcProgress(float cur_time)
     {
         //Calculate the difference between time since the last growth update  and the current time.
-        float time_difference = cur_time-timeAtGrowth;
+        float time_difference = calcDifference(cur_time);
         
         //If the difference is equal to seed_time value, then update the current growth stage
         //and reset time_since_growth.
@@ -121,6 +136,12 @@ public class Tile {
         return false;
     }
     
+    //Calculates how much time there will be between growth stages.
+    //return how long it has been since the seed jumped stages.
+    public float calcDifference(float cur_time)
+    {
+        return cur_time-timeAtGrowth;
+    }
     /**
    * Updates the tile
    * Takes the time and increases seed's growth state if enough time
