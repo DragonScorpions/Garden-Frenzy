@@ -130,11 +130,12 @@ public class UITile extends javax.swing.JPanel {
     }//GEN-LAST:event_CenterLabelMouseReleased
 
     //Set the newest current seed
-    //TODO: check that another seed isn't already taking up space
     private void PlantSeed()
     {
-        //TODO: check to make sure the current tile doesn't have a seed already there
-        HarvestSeed(); //reset the seed no matter what. TODO: remove when check is added
+        //reset the seed no matter wha.
+        //yes this means if there is a seed already there, it will be harvested
+        //This is intentional to prevent rapid clicking.
+        HarvestSeed(); 
         
         if(!GlobalState.SelectedSeed.equals("None")) //If the player is actually planting
         {
