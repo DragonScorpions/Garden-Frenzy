@@ -150,9 +150,14 @@ public class UITile extends javax.swing.JPanel {
     //TODO: get worth of seed and add to player wallet
     private void HarvestSeed()
     {
-        System.out.println("UITile: " + tile.currentSeed + " would be harvested");
+        System.out.println("UITile: " + tile.currentSeed + " would harvested!");
         ImageIcon emptyTile = new ImageIcon("src/Images/EmptyTile.png");
-        tile.Harvest();
+        
+        //reset seed tile while adding its worth to player's money amount
+        int worth = tile.Harvest();
+        System.out.println("UITile: " + worth + " received!");
+        GlobalState.Player.addMoney(worth); 
+        
         CenterLabel.setIcon(emptyTile);
         
         
