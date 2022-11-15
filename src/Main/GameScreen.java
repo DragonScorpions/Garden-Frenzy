@@ -7,6 +7,8 @@ import javax.swing.JFrame;
  * @author Julia
  */
 public class GameScreen extends javax.swing.JFrame {
+    private UIPlot[] plots;
+    
     /**
      * Creates new form GameScreen
      */
@@ -19,7 +21,7 @@ public class GameScreen extends javax.swing.JFrame {
         GlobalState.SelectedSeed = "Harvest";
         
         // Populate UI with PlayerData
-        UIPlot[] plots = { uIPlot1, uIPlot2, uIPlot3, uIPlot4, uIPlot5, uIPlot6, uIPlot7, uIPlot8, uIPlot9 };
+        plots = new UIPlot[] { uIPlot1, uIPlot2, uIPlot3, uIPlot4, uIPlot5, uIPlot6, uIPlot7, uIPlot8, uIPlot9 };
         for (int p = 0; p < Constants.NumPlots; p++)
             plots[p].SetPlot(GlobalState.Player.plots[p]);
         
@@ -176,14 +178,20 @@ public class GameScreen extends javax.swing.JFrame {
      * @param time Time since the beginning of the game in seconds
      */
     private void Update(float time) {
-        // TODO: implement update function
-        System.out.println(time);
+        updatePlots(time);
         
         //If 10 minutes have passed, forcibly end the game.
         if(time >= 600)
         {
             System.out.println("Game end");
             endGame();
+        }
+    }
+    
+    private void updatePlots(float time)
+    {
+        for (UIPlot plot : plots) {
+            plot.Update(time);
         }
     }
     

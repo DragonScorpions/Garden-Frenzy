@@ -133,16 +133,15 @@ public class UITile extends javax.swing.JPanel {
     //TODO: check that another seed isn't already taking up space
     private void PlantSeed()
     {
-        
+        HarvestSeed();
         if(!GlobalState.SelectedSeed.equals("Harvest"))
         {
+            
             System.out.println("UITile: " + GlobalState.SelectedSeed + " planted!");
             ImageIcon plantedSeed = new ImageIcon("src/Images/growth_1.png");
             CenterLabel.setIcon(plantedSeed);
             tile.currentSeed = GlobalState.SelectedSeed;
         }
-        else
-            HarvestSeed();
     }
     
     //Harvest the current seed of the tile
@@ -151,8 +150,29 @@ public class UITile extends javax.swing.JPanel {
     {
         System.out.println("UITile: " + tile.currentSeed + " would be harvested");
         ImageIcon emptyTile = new ImageIcon("src/Images/EmptyTile.png");
+        tile.Harvest();
         CenterLabel.setIcon(emptyTile);
-        tile.currentSeed = "None";
+        
+        
+    }
+    
+    public void Update(float time)
+    {
+        if(tile.Update(time)) //If the growth state has been advanced.
+        {
+            String seedIcon = "src/Images/";
+            if (tile.currentSeed.equals("None"))
+                seedIcon += "EmptyTile";
+            else if (tile.getGrowthStage() < 2) {
+                seedIcon += "growth_";
+                seedIcon += tile.getGrowthStage() + 1;
+            } else if (tile.getGrowthStage() == 2)
+                seedIcon += tile.currentSeed;
+            seedIcon += ".png";
+            System.out.println(seedIcon);
+            ImageIcon plantedSeed = new ImageIcon(seedIcon);
+            CenterLabel.setIcon(plantedSeed);
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
