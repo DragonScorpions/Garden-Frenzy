@@ -141,14 +141,19 @@ public class GameScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEndScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndScreenActionPerformed
+        endGame();
+    }//GEN-LAST:event_btnEndScreenActionPerformed
+
+    private void endGame()
+    {
         Timer.Stop();
         
         EndScreen endScreen = new EndScreen();
         endScreen.setVisible(true);
         
         dispose();
-    }//GEN-LAST:event_btnEndScreenActionPerformed
-
+    }
+    
     //Pumpkin shop button
     private void Pumpkin_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pumpkin_ButtonActionPerformed
         System.out.println("Pumpkin selected!");
@@ -173,6 +178,13 @@ public class GameScreen extends javax.swing.JFrame {
     private void Update(float time) {
         // TODO: implement update function
         System.out.println(time);
+        
+        //If 10 minutes have passed, forcibly end the game.
+        if(time >= 600)
+        {
+            System.out.println("Game end");
+            endGame();
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
