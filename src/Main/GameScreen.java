@@ -7,6 +7,8 @@ import javax.swing.JFrame;
  * @author Julia
  */
 public class GameScreen extends javax.swing.JFrame {
+    private UIPlot[] plots;
+    
     /**
      * Creates new form GameScreen
      */
@@ -19,7 +21,7 @@ public class GameScreen extends javax.swing.JFrame {
         GlobalState.SelectedSeed = "Harvest";
         
         // Populate UI with PlayerData
-        UIPlot[] plots = { uIPlot1, uIPlot2, uIPlot3, uIPlot4, uIPlot5, uIPlot6, uIPlot7, uIPlot8, uIPlot9 };
+        plots = new UIPlot[] { uIPlot1, uIPlot2, uIPlot3, uIPlot4, uIPlot5, uIPlot6, uIPlot7, uIPlot8, uIPlot9 };
         for (int p = 0; p < Constants.NumPlots; p++)
             plots[p].SetPlot(GlobalState.Player.plots[p]);
         
@@ -141,14 +143,19 @@ public class GameScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEndScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndScreenActionPerformed
+        endGame();
+    }//GEN-LAST:event_btnEndScreenActionPerformed
+
+    private void endGame()
+    {
         Timer.Stop();
         
         EndScreen endScreen = new EndScreen();
         endScreen.setVisible(true);
         
         dispose();
-    }//GEN-LAST:event_btnEndScreenActionPerformed
-
+    }
+    
     //Pumpkin shop button
     private void Pumpkin_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pumpkin_ButtonActionPerformed
         System.out.println("Pumpkin selected!");
@@ -171,8 +178,21 @@ public class GameScreen extends javax.swing.JFrame {
      * @param time Time since the beginning of the game in seconds
      */
     private void Update(float time) {
-        // TODO: implement update function
-        System.out.println(time);
+        updatePlots(time);
+        
+        //If 10 minutes have passed, forcibly end the game.
+        if(time >= 600)
+        {
+            System.out.println("Game end");
+            endGame();
+        }
+    }
+    
+    private void updatePlots(float time)
+    {
+        for (UIPlot plot : plots) {
+            plot.Update(time);
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

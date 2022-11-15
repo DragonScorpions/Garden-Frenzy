@@ -10,7 +10,7 @@ public class Tile {
     public String currentSeed; //The current seed this tile holds
     private boolean enabled; //Can the user interact with this tile?
     private int growth_stage; //What state of growth is the seed in?
-    private float time_since_growth; //When was the last time growth stage was updated?
+    private float timeAtGrowth; //When was the last time growth stage was updated?
                       //In seconds from game start
                       //(min=0=game start, max=game end time in seconds)
     
@@ -18,7 +18,7 @@ public class Tile {
         currentSeed = "None";
         enabled = false;
         growth_stage = 0;
-        time_since_growth = 0;
+        timeAtGrowth = 0;
     }
     
     public void disable(){
@@ -38,7 +38,7 @@ public class Tile {
     }
     
     public float getTimeSinceGrowth(){
-        return time_since_growth;
+        return timeAtGrowth;
     }
     
    /**
@@ -60,8 +60,9 @@ public class Tile {
             worth = 0;
         }
         //TODO: Add sound effect to play? Or return sound effect?
-        currentSeed = " "; //Remove the seed
+        currentSeed = "None"; //Remove the seed
         growth_stage = 0; //reset the growth stage
+        timeAtGrowth = Timer.GetTime();
         return worth; // return money gained - based on growth stage
     }
     
@@ -76,7 +77,7 @@ public class Tile {
         if(enabled)
         {
             currentSeed = seed;
-            time_since_growth = time;
+            timeAtGrowth = time;
         }
     }
     
@@ -90,6 +91,7 @@ public class Tile {
         //Check if the current seed is ripe or is still growing
         if(growth_stage <= Constants.Seeds.get(currentSeed).GetStages())
             growth_stage++;
+        
         //Else, don't update. If this doesn't trigger,
         //then the growth stage will be equal to one HIGHER than its ripe stage.
         //This is intentional.
@@ -102,28 +104,32 @@ public class Tile {
    * has passed.
    * @param cur_time (float) How many seconds have passed since the game started
    */
-    private void calcProgress(float cur_time)
+    private boolean calcProgress(float cur_time)
     {
         //Calculate the difference between time since the last growth update  and the current time.
-        float time_difference = cur_time-time_since_growth;
+        float time_difference = cur_time-timeAtGrowth;
         
         //If the difference is equal to seed_time value, then update the current growth stage
         //and reset time_since_growth.
-        if(Constants.Seeds.get(currentSeed).GetTime() >= time_difference)
+        if(Constants.Seeds.get(currentSeed).GetTime() <= time_difference)
         {
             updateGrowthState();
-            time_since_growth = cur_time;
+            timeAtGrowth = cur_time;
+            return true;
+           
         }
+        return false;
     }
     
     /**
    * Updates the tile
    * Takes the time and increases seed's growth state if enough time
    * has passed.
+   * @return boolean if the growth stage was advanced
    * @param cur_time (float) How many seconds have passed since the game started.
    */
-    public void Update(float cur_time){
-        calcProgress(cur_time);
+    public boolean Update(float cur_time){
+        return calcProgress(cur_time);
     }
     
     /**
@@ -131,7 +137,7 @@ public class Tile {
      * @return Tile as a string
      */
     public String ToSaveString() {
-        return currentSeed + ", " + enabled + ", " + growth_stage + ", " + time_since_growth;
+        return currentSeed + ", " + enabled + ", " + growth_stage + ", " + timeAtGrowth;
     }
     
     /**
@@ -143,6 +149,6 @@ public class Tile {
         currentSeed = fields[0];
         enabled = Boolean.parseBoolean(fields[1]);
         growth_stage = Integer.parseInt(fields[2]);
-        time_since_growth = Float.parseFloat(fields[3]);
+        timeAtGrowth = Float.parseFloat(fields[3]);
     }
 }
