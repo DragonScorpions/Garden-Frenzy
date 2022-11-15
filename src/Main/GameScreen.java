@@ -242,7 +242,7 @@ public class GameScreen extends javax.swing.JFrame {
             endGame();
         }
     }
-    
+
     private void updateMoneyLabel()
     {
         MoneyLabel.setText("$" + GlobalState.Player.getMoney());
