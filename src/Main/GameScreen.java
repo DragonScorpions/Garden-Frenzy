@@ -56,6 +56,7 @@ public class GameScreen extends javax.swing.JFrame {
         Pumpkin_Button = new javax.swing.JButton();
         btnSaveAndExit = new javax.swing.JButton();
         HarvestButton = new javax.swing.JButton();
+        MoneyLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 640, 480));
@@ -90,6 +91,8 @@ public class GameScreen extends javax.swing.JFrame {
             }
         });
 
+        MoneyLabel.setText("$0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -119,10 +122,15 @@ public class GameScreen extends javax.swing.JFrame {
                                 .addComponent(uIPlot6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(btnEndScreen)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSaveAndExit)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(btnEndScreen)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSaveAndExit))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(77, 77, 77)
+                                .addComponent(MoneyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(70, 70, 70)
@@ -156,7 +164,9 @@ public class GameScreen extends javax.swing.JFrame {
                     .addComponent(Pumpkin_Button)
                     .addComponent(btnSaveAndExit, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(HarvestButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(HarvestButton)
+                    .addComponent(MoneyLabel))
                 .addGap(15, 15, 15))
         );
 
@@ -224,13 +234,18 @@ public class GameScreen extends javax.swing.JFrame {
      */
     private void Update(float time) {
         updatePlots(time);
-        
+        updateMoneyLabel();
         //If 10 minutes have passed, forcibly end the game.
         if(time >= 600)
         {
             System.out.println("Game end");
             endGame();
         }
+    }
+    
+    private void updateMoneyLabel()
+    {
+        MoneyLabel.setText("$" + GlobalState.Player.getMoney());
     }
     
     private void updatePlots(float time)
@@ -242,6 +257,7 @@ public class GameScreen extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton HarvestButton;
+    private javax.swing.JLabel MoneyLabel;
     private javax.swing.JButton Pumpkin_Button;
     private javax.swing.JButton btnEndScreen;
     private javax.swing.JButton btnSaveAndExit;
