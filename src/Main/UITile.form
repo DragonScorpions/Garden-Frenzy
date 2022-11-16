@@ -31,7 +31,7 @@
           <Component id="CenterLabel" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jProgressBar1" min="-2" pref="67" max="-2" attributes="0"/>
+              <Component id="seedProgressBar" min="-2" pref="67" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -41,7 +41,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="CenterLabel" min="-2" pref="58" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jProgressBar1" pref="11" max="32767" attributes="0"/>
+              <Component id="seedProgressBar" pref="11" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -59,7 +59,7 @@
         <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="CenterLabelMouseReleased"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JProgressBar" name="jProgressBar1">
+    <Component class="javax.swing.JProgressBar" name="seedProgressBar">
     </Component>
   </SubComponents>
 </Form>

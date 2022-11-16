@@ -1,7 +1,5 @@
 package Main;
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 
 /*
@@ -45,13 +43,8 @@ public class UITile extends javax.swing.JPanel {
     //Init function that initializes the tile to be empty
     public void SetTile(Tile tile) {
         this.tile = tile;
-       
-    }
-
-    //Changes the seed that will be planted when this tile is clicked
-    public void prepareNewSeed(String seed)
-    {
-        //seedToPlant = seed;
+        System.out.print(tile.getCurrentSeed() + " " + tile.getGrowthStage());
+        UpdatePlantImage();
     }
     
     /**
@@ -64,7 +57,7 @@ public class UITile extends javax.swing.JPanel {
     private void initComponents() {
 
         CenterLabel = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        seedProgressBar = new javax.swing.JProgressBar();
 
         setMaximumSize(new java.awt.Dimension(75, 75));
         setMinimumSize(new java.awt.Dimension(75, 75));
@@ -89,7 +82,7 @@ public class UITile extends javax.swing.JPanel {
             .addComponent(CenterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(seedProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(85, 85, 85))
         );
         layout.setVerticalGroup(
@@ -97,7 +90,7 @@ public class UITile extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(CenterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 11, Short.MAX_VALUE))
+                .addComponent(seedProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 11, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -113,30 +106,22 @@ public class UITile extends javax.swing.JPanel {
     }//GEN-LAST:event_CenterLabelMouseReleased
 
     //Set the newest current seed
-    private void PlantSeed()
-    {
-        //reset the seed no matter wha.
-        //yes this means if there is a seed already there, it will be harvested
-        //This is intentional to prevent rapid clicking.
-        HarvestSeed(); 
-        
-        if(!GlobalState.SelectedSeed.equals("None")) //If the player is actually planting
-        {
-            
+    private void PlantSeed() {
+        if(!GlobalState.SelectedSeed.equals("None")) { //If the player is actually planting
             System.out.println("UITile: " + GlobalState.SelectedSeed + " planted!");
             ImageIcon plantedSeed = new ImageIcon("src/Images/growth_1.png");
             CenterLabel.setIcon(plantedSeed);
-            tile.currentSeed = GlobalState.SelectedSeed;
-            jProgressBar1.setValue(0);
-        }
-        
+            tile.Plant(GlobalState.SelectedSeed);
+            seedProgressBar.setValue(0);
+        } else
+            HarvestSeed();
     }
     
     //Harvest the current seed of the tile
     //TODO: get worth of seed and add to player wallet
     private void HarvestSeed()
     {
-        System.out.println("UITile: " + tile.currentSeed + " would harvested!");
+        System.out.println("UITile: " + tile.getCurrentSeed() + " would harvested!");
         ImageIcon emptyTile = new ImageIcon("src/Images/EmptyTile.png");
 
         //reset seed tile while adding its worth to player's money amount
@@ -144,31 +129,21 @@ public class UITile extends javax.swing.JPanel {
         System.out.println("UITile: " + worth + " received!");
         GlobalState.Player.addMoney(worth);  
         CenterLabel.setIcon(emptyTile);
-        jProgressBar1.setValue(0);
+        seedProgressBar.setValue(0);
         
     }
     
     public void Update(float time)
     {
-        if(tile.Update(time)) //If the growth state has been advanced.
-        {
-            String seedIcon = "src/Images/";
-            if (tile.currentSeed.equals("None"))
-                seedIcon += "EmptyTile";
-            else if (tile.getGrowthStage() < 2) {
-                seedIcon += "growth_";
-                seedIcon += tile.getGrowthStage() + 1;
-            } else if (tile.getGrowthStage() == 2)
-                seedIcon += tile.currentSeed;
-            seedIcon += ".png";
-            System.out.println(seedIcon);
-            ImageIcon plantedSeed = new ImageIcon(seedIcon);
-            CenterLabel.setIcon(plantedSeed);
+        if(tile.Update(time)) { //If the growth state has been advanced.
+            UpdatePlantImage();
+            if (tile.isRotten())
+                seedProgressBar.setValue(0);
         }
         
         //only update the bar if there is a seed planted in the tile
         //and if the current tile is not rotten 
-        if(!tile.currentSeed.equals("None") && !tile.isRotten())
+        if(!tile.getCurrentSeed().equals("None") && !tile.isRotten())
             updateProgressBar(time);
     }
     
@@ -176,12 +151,28 @@ public class UITile extends javax.swing.JPanel {
     private void updateProgressBar(float time)
     {
         //Note: progress bar is between 0 and 100%, so set value should be from 0 to 100
-        float percent = tile.calcDifference(time)/Constants.Seeds.get(tile.currentSeed).GetTime()*100;
-        jProgressBar1.setValue((int)Math.ceil(percent));
+        float percent = tile.calcDifference(time) / Constants.Seeds.get(tile.getCurrentSeed()).GetTime() * 100;
+        seedProgressBar.setValue((int)Math.ceil(percent));
+    }
+    
+    // Updates the plant icon based on the Tile 
+    private void UpdatePlantImage() {
+        String seedIcon = "src/Images/";
+        if (tile.isRotten() || tile.getCurrentSeed().equals("None"))
+            seedIcon += "EmptyTile";
+        else if (tile.getGrowthStage() < 2) {
+            seedIcon += "growth_";
+            seedIcon += tile.getGrowthStage() + 1;
+        } else if (tile.getGrowthStage() == 2)
+            seedIcon += tile.getCurrentSeed();
+        seedIcon += ".png";
+        System.out.println(seedIcon);
+        ImageIcon plantedSeed = new ImageIcon(seedIcon);
+        CenterLabel.setIcon(plantedSeed);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CenterLabel;
-    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JProgressBar seedProgressBar;
     // End of variables declaration//GEN-END:variables
 }
