@@ -1,9 +1,4 @@
 package Main;
-import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -15,7 +10,7 @@ import javax.swing.JLabel;
  */
 public class UIPlot extends javax.swing.JPanel {
 
-    private UITile[] tiles;
+    private final UITile[] tiles;
     
     /**
      * Creates new form UIPlot
@@ -29,23 +24,18 @@ public class UIPlot extends javax.swing.JPanel {
     }
     
     public void SetPlot(Plot plot) {
-        UITile[] tiles = { uITile1, uITile2, uITile3, uITile4 };
-        for(int t = 0; t < Constants.TilesPerPlot; t++){
+        for(int t = 0; t < Constants.TilesPerPlot; t++)
             tiles[t].SetTile(plot.tiles[t]);
-        }
     }
     
-    public void Update(float time)
-    {
+    public void Update(float time) {
         UpdateTiles(time);
     }
     
     //updates every tile with the current time
-    private void UpdateTiles(float time)
-    {
-        for (UITile tile : tiles) {
+    private void UpdateTiles(float time) {
+        for (UITile tile : tiles)
             tile.Update(time);
-        }
     }
 
     /**

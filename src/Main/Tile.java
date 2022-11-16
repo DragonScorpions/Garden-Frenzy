@@ -7,8 +7,7 @@ package Main;
  */
 public class Tile {
     
-    public String currentSeed; //The current seed this tile holds
-    private boolean enabled; //Can the user interact with this tile?
+    private String currentSeed; //The current seed this tile holds
     private int growth_stage; //What state of growth is the seed in?
     private float timeAtGrowth; //When was the last time growth stage was updated?
                       //In seconds from game start
@@ -17,28 +16,19 @@ public class Tile {
     
     public Tile() {
         currentSeed = "None";
-        enabled = false;
         growth_stage = 0;
         timeAtGrowth = 0;
         rotten = false;
     }
     
-    public void disable(){
-        enabled = false;
+    public String getCurrentSeed() {
+        return currentSeed;
     }
     
     //returns if the current seed is rotten
     public boolean isRotten()
     {
         return rotten;
-    }
-    
-    public void enable() {
-        enabled = true;
-    }
-    
-    public boolean getEnabled(){
-        return enabled;
     }
     
     public int getGrowthStage(){
@@ -68,10 +58,7 @@ public class Tile {
             worth = 0;
         }
         //TODO: Add sound effect to play? Or return sound effect?
-        currentSeed = "None"; //Remove the seed
-        growth_stage = 0; //reset the growth stage
-        timeAtGrowth = Timer.GetTime();
-        rotten = false;
+        Plant("None");
         return worth; // return money gained - based on growth stage
     }
     
@@ -79,16 +66,12 @@ public class Tile {
    * Plants the given seed.
    * Sets the tile's seed equal to the received seed.
    * @param seed (string) What seed is being planted?
-   * @param time (float) How many seconds from game start did planting occur?
    */
-    public void Plant(String seed, float time)
-    {
-        if(enabled)
-        {
-            currentSeed = seed;
-            timeAtGrowth = time;
-            rotten = false;
-        }
+    public void Plant(String seed) {
+        currentSeed = seed;
+        growth_stage = 0;
+        timeAtGrowth = Timer.GetTime();
+        rotten = false;
     }
     
     /**
@@ -146,7 +129,7 @@ public class Tile {
    * Updates the tile
    * Takes the time and increases seed's growth state if enough time
    * has passed.
-   * @return boolean if the growth stage was advanced
+   * @return Boolean if the growth stage was advanced
    * @param cur_time (float) How many seconds have passed since the game started.
    */
     public boolean Update(float cur_time){
@@ -158,7 +141,7 @@ public class Tile {
      * @return Tile as a string
      */
     public String ToSaveString() {
-        return currentSeed + ", " + enabled + ", " + growth_stage + ", " + timeAtGrowth;
+        return currentSeed + ", " + growth_stage + ", " + timeAtGrowth + ", " + rotten;
     }
     
     /**
@@ -168,8 +151,8 @@ public class Tile {
     public void FromSaveString(String data) {
         String[] fields = data.split(", ");
         currentSeed = fields[0];
-        enabled = Boolean.parseBoolean(fields[1]);
-        growth_stage = Integer.parseInt(fields[2]);
-        timeAtGrowth = Float.parseFloat(fields[3]);
+        growth_stage = Integer.parseInt(fields[1]);
+        timeAtGrowth = Float.parseFloat(fields[2]);
+        rotten = Boolean.parseBoolean(fields[3]);
     }
 }
