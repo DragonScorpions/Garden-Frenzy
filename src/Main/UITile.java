@@ -64,7 +64,7 @@ public class UITile extends javax.swing.JPanel {
     private void initComponents() {
 
         CenterLabel = new javax.swing.JLabel();
-        CButton = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
 
         setMaximumSize(new java.awt.Dimension(75, 75));
         setMinimumSize(new java.awt.Dimension(75, 75));
@@ -82,41 +82,24 @@ public class UITile extends javax.swing.JPanel {
             }
         });
 
-        CButton.setText("Click me!");
-        CButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(CButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(CenterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(85, 85, 85))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(CenterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 11, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void CButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CButtonActionPerformed
-        CenterLabel.setText(
-                "<html>" + 
-                tile.currentSeed + "<br/>" +
-                String.valueOf(tile.getEnabled()) + "<br/>"+
-                String.valueOf(tile.getGrowthStage()) + "<br/>"+
-                String.valueOf(tile.getTimeSinceGrowth()) + "</html>");
-                
-    }//GEN-LAST:event_CButtonActionPerformed
 
     
     //When the text is clicked, do what?
@@ -130,29 +113,38 @@ public class UITile extends javax.swing.JPanel {
     }//GEN-LAST:event_CenterLabelMouseReleased
 
     //Set the newest current seed
-    //TODO: check that another seed isn't already taking up space
     private void PlantSeed()
     {
-        HarvestSeed();
-        if(!GlobalState.SelectedSeed.equals("Harvest"))
+        //reset the seed no matter wha.
+        //yes this means if there is a seed already there, it will be harvested
+        //This is intentional to prevent rapid clicking.
+        HarvestSeed(); 
+        
+        if(!GlobalState.SelectedSeed.equals("None")) //If the player is actually planting
         {
             
             System.out.println("UITile: " + GlobalState.SelectedSeed + " planted!");
             ImageIcon plantedSeed = new ImageIcon("src/Images/growth_1.png");
             CenterLabel.setIcon(plantedSeed);
             tile.currentSeed = GlobalState.SelectedSeed;
+            jProgressBar1.setValue(0);
         }
+        
     }
     
     //Harvest the current seed of the tile
     //TODO: get worth of seed and add to player wallet
     private void HarvestSeed()
     {
-        System.out.println("UITile: " + tile.currentSeed + " would be harvested");
+        System.out.println("UITile: " + tile.currentSeed + " would harvested!");
         ImageIcon emptyTile = new ImageIcon("src/Images/EmptyTile.png");
-        tile.Harvest();
+
+        //reset seed tile while adding its worth to player's money amount
+        int worth = tile.Harvest();
+        System.out.println("UITile: " + worth + " received!");
+        GlobalState.Player.addMoney(worth);  
         CenterLabel.setIcon(emptyTile);
-        
+        jProgressBar1.setValue(0);
         
     }
     
@@ -173,10 +165,23 @@ public class UITile extends javax.swing.JPanel {
             ImageIcon plantedSeed = new ImageIcon(seedIcon);
             CenterLabel.setIcon(plantedSeed);
         }
+        
+        //only update the bar if there is a seed planted in the tile
+        //and if the current tile is not rotten 
+        if(!tile.currentSeed.equals("None") && !tile.isRotten())
+            updateProgressBar(time);
+    }
+    
+    //Update the progress bar of time until next growth state
+    private void updateProgressBar(float time)
+    {
+        //Note: progress bar is between 0 and 100%, so set value should be from 0 to 100
+        float percent = tile.calcDifference(time)/Constants.Seeds.get(tile.currentSeed).GetTime()*100;
+        jProgressBar1.setValue((int)Math.ceil(percent));
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CButton;
     private javax.swing.JLabel CenterLabel;
+    private javax.swing.JProgressBar jProgressBar1;
     // End of variables declaration//GEN-END:variables
 }

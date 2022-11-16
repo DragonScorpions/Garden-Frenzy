@@ -30,6 +30,15 @@ public class PlayerData extends FileData {
     public int getMoney() {
         return money;
     }
+    
+    /**
+     * adds specified amount to the player's money
+     * @param amount the amount of money to be added.
+     */
+    public void addMoney(int amount)
+    {
+        money+=amount;
+    }
 
     /**
      * Gets the player's plants grown

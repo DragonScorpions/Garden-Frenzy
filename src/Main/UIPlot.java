@@ -40,6 +40,7 @@ public class UIPlot extends javax.swing.JPanel {
         UpdateTiles(time);
     }
     
+    //updates every tile with the current time
     private void UpdateTiles(float time)
     {
         for (UITile tile : tiles) {
