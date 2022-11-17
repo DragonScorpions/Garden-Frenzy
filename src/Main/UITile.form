@@ -60,6 +60,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JProgressBar" name="seedProgressBar">
+      <Properties>
+        <Property name="opaque" type="boolean" value="true"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
