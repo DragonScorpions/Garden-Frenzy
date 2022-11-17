@@ -19,13 +19,13 @@ public final class Constants {
     
     /**
      * All the available seeds of the game organized by name
-     * Note: seed is new Seed(worth,time,stages)
+     * Note: seed is new Seed(worth,time,stages,price)
      */
     public static final Map<String, Seed> Seeds = Map.of(
-        "None", new Seed(0, 999, 999),
-        "Pumpkin", new Seed(1, 3, 2),
-        "Strawberry", new Seed(2, 10, 2),
-        "Corn", new Seed(3, 10, 2)
+        "None", new Seed(0, 999, 999,0),
+        "Pumpkin", new Seed(1, 3, 2, 1),
+        "Strawberry", new Seed(2, 10, 2, 1),
+        "Corn", new Seed(3, 10, 2, 1)
     );
     
     /**

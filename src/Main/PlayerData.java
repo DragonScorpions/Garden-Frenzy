@@ -15,7 +15,7 @@ public class PlayerData extends FileData {
      * Default constructor for blank PlayerData
      */
     public PlayerData() {
-        money = 0;
+        money = 2;
         plants_grown = 0;
         plots_unlocked = 0;
         //initialize plots - make this a function later

@@ -21,15 +21,21 @@ public class Seed {
     private final int stages;
     
     /**
+     * How much does this seed cost to plant?
+     */
+    private final int price;
+    
+    /**
      * Creates a new seed with the given values
      * @param worth The amount of money gotten from harvesting the plant
      * @param time The amount of time it takes the seed to grow
      * @param stages The amount of growth stages that the plant has
      */
-    public Seed(int worth, int time, int stages) {
+    public Seed(int worth, int time, int stages, int price) {
         this.worth = worth;
         this.time = time;
         this.stages = stages;
+        this.price = price;
     }
     
     /**
@@ -37,6 +43,12 @@ public class Seed {
      * @return amount of money
      */
     public int GetWorth() { return worth; }
+    
+    /**
+     * Gets the price of the seed the user must pay
+     * @return cost of seed
+     */
+    public int GetPrice() { return price; }
     
     /**
      * Gets the amount of time it takes to finish a growth stage in seconds
