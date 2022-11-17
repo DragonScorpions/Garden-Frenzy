@@ -49,6 +49,11 @@ public class UITile extends javax.swing.JPanel {
         UpdatePlantImage();
     }
     
+    public void disable()
+    {
+        CenterLabel.setEnabled(false);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -108,6 +113,7 @@ public class UITile extends javax.swing.JPanel {
     private void CenterLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CenterLabelMouseReleased
        if(trySubtractMoney(Constants.Seeds.get(GlobalState.SelectedSeed).GetPrice()))
         {   
+            //if player has enough money
             PlantSeed();
         }
     }//GEN-LAST:event_CenterLabelMouseReleased

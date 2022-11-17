@@ -24,7 +24,7 @@ public class GameScreen extends javax.swing.JFrame {
         GlobalState.SelectedSeed = "None";
         
         //set UI layout of shop to the relevant (harvest) mode
-        toggleSeedButtons();
+        //toggleSeedButtons();
         
         JButton seedbtns[] = new JButton[] {Pumpkin_Button, Corn_Button, Strawberry_Button};
         BorderHandler borderhandler = new BorderHandler();
@@ -75,11 +75,19 @@ public class GameScreen extends javax.swing.JFrame {
         uIPlot8 = new Main.UIPlot();
         uIPlot9 = new Main.UIPlot();
         btnSaveAndExit = new javax.swing.JButton();
-        HarvestButton = new javax.swing.JButton();
         MoneyLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        Strawberry_Button = new javax.swing.JButton();
+        HarvestPanel = new javax.swing.JPanel();
+        HarvestButton = new javax.swing.JButton();
+        HarvestText = new javax.swing.JLabel();
+        PumpkinPanel = new javax.swing.JPanel();
         Pumpkin_Button = new javax.swing.JButton();
+        PumpkinText = new javax.swing.JLabel();
+        StrawBerryPanel = new javax.swing.JPanel();
+        StrawBerryText = new javax.swing.JLabel();
+        Strawberry_Button = new javax.swing.JButton();
+        CornPanel = new javax.swing.JPanel();
+        CornText = new javax.swing.JLabel();
         Corn_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -101,22 +109,40 @@ public class GameScreen extends javax.swing.JFrame {
             }
         });
 
-        HarvestButton.setText("Stop planting");
+        MoneyLabel.setText("$0");
+
+        HarvestButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Scythe.png"))); // NOI18N
         HarvestButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 HarvestButtonActionPerformed(evt);
             }
         });
 
-        MoneyLabel.setText("$0");
+        HarvestText.setText("Harvest");
 
-        Strawberry_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/StrawberrySeed.png"))); // NOI18N
-        Strawberry_Button.setPreferredSize(new java.awt.Dimension(89, 25));
-        Strawberry_Button.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Strawberry_ButtonActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout HarvestPanelLayout = new javax.swing.GroupLayout(HarvestPanel);
+        HarvestPanel.setLayout(HarvestPanelLayout);
+        HarvestPanelLayout.setHorizontalGroup(
+            HarvestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(HarvestPanelLayout.createSequentialGroup()
+                .addContainerGap(7, Short.MAX_VALUE)
+                .addGroup(HarvestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HarvestPanelLayout.createSequentialGroup()
+                        .addComponent(HarvestButton)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HarvestPanelLayout.createSequentialGroup()
+                        .addComponent(HarvestText, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14))))
+        );
+        HarvestPanelLayout.setVerticalGroup(
+            HarvestPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HarvestPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(HarvestText)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(HarvestButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         Pumpkin_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/PumpkinSeeds.png"))); // NOI18N
         Pumpkin_Button.setPreferredSize(new java.awt.Dimension(89, 25));
@@ -126,6 +152,65 @@ public class GameScreen extends javax.swing.JFrame {
             }
         });
 
+        PumpkinText.setText("Pumpkin - $1");
+
+        javax.swing.GroupLayout PumpkinPanelLayout = new javax.swing.GroupLayout(PumpkinPanel);
+        PumpkinPanel.setLayout(PumpkinPanelLayout);
+        PumpkinPanelLayout.setHorizontalGroup(
+            PumpkinPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PumpkinPanelLayout.createSequentialGroup()
+                .addGroup(PumpkinPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PumpkinPanelLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(PumpkinText))
+                    .addGroup(PumpkinPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Pumpkin_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        PumpkinPanelLayout.setVerticalGroup(
+            PumpkinPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PumpkinPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PumpkinText)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Pumpkin_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        StrawBerryText.setText("Strawberry - $0");
+
+        Strawberry_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/StrawberrySeed.png"))); // NOI18N
+        Strawberry_Button.setPreferredSize(new java.awt.Dimension(89, 25));
+        Strawberry_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Strawberry_ButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout StrawBerryPanelLayout = new javax.swing.GroupLayout(StrawBerryPanel);
+        StrawBerryPanel.setLayout(StrawBerryPanelLayout);
+        StrawBerryPanelLayout.setHorizontalGroup(
+            StrawBerryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(StrawBerryPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(StrawBerryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(StrawBerryText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Strawberry_Button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        StrawBerryPanelLayout.setVerticalGroup(
+            StrawBerryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(StrawBerryPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(StrawBerryText)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Strawberry_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        CornText.setText("Corn - $2");
+
         Corn_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/CornSeed.png"))); // NOI18N
         Corn_Button.setPreferredSize(new java.awt.Dimension(89, 25));
         Corn_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -134,26 +219,53 @@ public class GameScreen extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout CornPanelLayout = new javax.swing.GroupLayout(CornPanel);
+        CornPanel.setLayout(CornPanelLayout);
+        CornPanelLayout.setHorizontalGroup(
+            CornPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CornPanelLayout.createSequentialGroup()
+                .addComponent(Corn_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 10, Short.MAX_VALUE))
+            .addGroup(CornPanelLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(CornText)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        CornPanelLayout.setVerticalGroup(
+            CornPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CornPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(CornText)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Corn_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Strawberry_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Pumpkin_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Corn_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(HarvestPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PumpkinPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(StrawBerryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CornPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Strawberry_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Pumpkin_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Corn_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(CornPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(StrawBerryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(HarvestPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PumpkinPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -164,43 +276,32 @@ public class GameScreen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnEndScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnSaveAndExit, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(HarvestButton))
+                        .addComponent(uIPlot1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(uIPlot2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(uIPlot3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(uIPlot1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(uIPlot2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(uIPlot3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(uIPlot4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(uIPlot5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(uIPlot6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(uIPlot7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(15, 15, 15)
-                                .addComponent(uIPlot8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(uIPlot9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(90, 90, 90)
-                                .addComponent(MoneyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(90, 90, 90)))
-                        .addGap(0, 15, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(uIPlot4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(uIPlot5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(uIPlot6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnEndScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSaveAndExit, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addComponent(MoneyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(uIPlot7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(15, 15, 15)
+                            .addComponent(uIPlot8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(uIPlot9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,20 +321,17 @@ public class GameScreen extends javax.swing.JFrame {
                     .addComponent(uIPlot7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(uIPlot8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(uIPlot9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnSaveAndExit, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btnEndScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(MoneyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(HarvestButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnSaveAndExit, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEndScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(MoneyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
@@ -253,6 +351,7 @@ public class GameScreen extends javax.swing.JFrame {
         dispose();
     }
     
+    /*
     private void toggleSeedButtons()
     {
         if(GlobalState.SelectedSeed.equals("None")) //if player is harvesting
@@ -267,6 +366,7 @@ public class GameScreen extends javax.swing.JFrame {
             HarvestButton.setVisible(true);
         }
     }
+    */
     
     private void btnSaveAndExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveAndExitActionPerformed
         GlobalState.Player.SaveToFile();
@@ -279,38 +379,33 @@ public class GameScreen extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnSaveAndExitActionPerformed
 
+    private void Strawberry_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Strawberry_ButtonActionPerformed
+        System.out.println("Strawberry planted!");
+        GlobalState.SelectedSeed = "Strawberry";
+        //toggleSeedButtons(); //then hide the shop buttons, and show harvest button
+    }//GEN-LAST:event_Strawberry_ButtonActionPerformed
+
     //Triggered when harvest button clicked, returns player to harvest mode
     //then toggles the UI to harvest layout
     private void HarvestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HarvestButtonActionPerformed
         System.out.println("GameScreen: Player is harvesting!");
         GlobalState.SelectedSeed = "None";
-        toggleSeedButtons();
+        //toggleSeedButtons();
     }//GEN-LAST:event_HarvestButtonActionPerformed
-
-    private void Strawberry_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Strawberry_ButtonActionPerformed
-        System.out.println("Strawberry planted!");
-        GlobalState.SelectedSeed = "Strawberry";
-        toggleSeedButtons(); //then hide the shop buttons, and show harvest button
-    }//GEN-LAST:event_Strawberry_ButtonActionPerformed
-
-    /**
-     * Has the player attempt to buy a pumpkin
-     * @param evt 
-     */
-    
-    private void Pumpkin_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pumpkin_ButtonActionPerformed
-        
-            System.out.println("Pumpkin planted!");
-            GlobalState.SelectedSeed = "Pumpkin";
-            toggleSeedButtons(); //then hide the shop buttons, and show harvest button
-    }//GEN-LAST:event_Pumpkin_ButtonActionPerformed
 
     private void Corn_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Corn_ButtonActionPerformed
         System.out.println("Corn planted!");
         GlobalState.SelectedSeed = "Corn";
-        toggleSeedButtons(); //then hide the shop buttons, and show harvest button
+        //toggleSeedButtons(); //then hide the shop buttons, and show harvest button
     }//GEN-LAST:event_Corn_ButtonActionPerformed
-  
+
+    private void Pumpkin_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pumpkin_ButtonActionPerformed
+        System.out.println("Pumpkin planted!");
+        GlobalState.SelectedSeed = "Pumpkin";
+        //toggleSeedButtons(); //then hide the shop buttons, and show harvest button
+    }//GEN-LAST:event_Pumpkin_ButtonActionPerformed
+
+ 
     
     /**
      * The update function of the game
@@ -340,10 +435,18 @@ public class GameScreen extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel CornPanel;
+    private javax.swing.JLabel CornText;
     private javax.swing.JButton Corn_Button;
     private javax.swing.JButton HarvestButton;
+    private javax.swing.JPanel HarvestPanel;
+    private javax.swing.JLabel HarvestText;
     private javax.swing.JLabel MoneyLabel;
+    private javax.swing.JPanel PumpkinPanel;
+    private javax.swing.JLabel PumpkinText;
     private javax.swing.JButton Pumpkin_Button;
+    private javax.swing.JPanel StrawBerryPanel;
+    private javax.swing.JLabel StrawBerryText;
     private javax.swing.JButton Strawberry_Button;
     private javax.swing.JButton btnEndScreen;
     private javax.swing.JButton btnSaveAndExit;
