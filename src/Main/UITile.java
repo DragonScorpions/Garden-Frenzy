@@ -45,7 +45,7 @@ public class UITile extends javax.swing.JPanel {
     //Init function that initializes the tile to be empty
     public void SetTile(Tile tile) {
         this.tile = tile;
-        System.out.print(tile.getCurrentSeed() + " " + tile.getGrowthStage());
+        //System.out.print(tile.getCurrentSeed() + " " + tile.getGrowthStage());
         UpdatePlantImage();
     }
     
@@ -188,7 +188,7 @@ public class UITile extends javax.swing.JPanel {
         } else if (tile.getGrowthStage() == 2)
             seedIcon += tile.getCurrentSeed();
         seedIcon += ".png";
-        System.out.println(seedIcon);
+        //System.out.println(seedIcon);
         ImageIcon plantedSeed = new ImageIcon(seedIcon);
         CenterLabel.setIcon(plantedSeed);
     }

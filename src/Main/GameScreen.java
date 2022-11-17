@@ -1,10 +1,10 @@
 package Main;
 
 import java.awt.Color;
-import java.awt.event.MouseAdapter;
 import static java.awt.image.ImageObserver.HEIGHT;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import java.awt.event.*;
 
 /**
  *
@@ -12,7 +12,7 @@ import javax.swing.JFrame;
  */
 public class GameScreen extends javax.swing.JFrame {
     private UIPlot[] plots;
-   
+    
     /**
      * Creates new form GameScreen
      */
@@ -28,6 +28,7 @@ public class GameScreen extends javax.swing.JFrame {
         
         JButton seedbtns[] = new JButton[] {Pumpkin_Button, Corn_Button, Strawberry_Button};
         BorderHandler borderhandler = new BorderHandler();
+        
         
         for (JButton btn: seedbtns){
             btn.setBackground(Color.decode("#ff8066")); // extra space
@@ -48,7 +49,7 @@ public class GameScreen extends javax.swing.JFrame {
         plots = new UIPlot[] { uIPlot1, uIPlot2, uIPlot3, uIPlot4, uIPlot5, uIPlot6, uIPlot7, uIPlot8, uIPlot9 };
         for (int p = 0; p < Constants.NumPlots; p++)
             plots[p].SetPlot(GlobalState.Player.plots[p]);
-        
+                
         // Set up timer and start
         Timer.SetUpdateListener(this::Update);
         Timer.Start();
@@ -98,11 +99,6 @@ public class GameScreen extends javax.swing.JFrame {
         setBounds(new java.awt.Rectangle(0, 0, 640, 480));
         setMinimumSize(new java.awt.Dimension(557, 638));
         setResizable(false);
-        addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                formKeyPressed(evt);
-            }
-        });
 
         btnEndScreen.setText("End Screen");
         btnEndScreen.addActionListener(new java.awt.event.ActionListener() {
@@ -405,7 +401,7 @@ public class GameScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveAndExitActionPerformed
 
     private void Strawberry_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Strawberry_ButtonActionPerformed
-        System.out.println("Strawberry planted!");
+        System.out.println("GameScreen: Strawberry planted!");
         GlobalState.SelectedSeed = "Strawberry";
         //toggleSeedButtons(); //then hide the shop buttons, and show harvest button
     }//GEN-LAST:event_Strawberry_ButtonActionPerformed
@@ -419,27 +415,17 @@ public class GameScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_HarvestButtonActionPerformed
 
     private void Corn_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Corn_ButtonActionPerformed
-        System.out.println("Corn planted!");
+        System.out.println("GameScreen: Corn planted!");
         GlobalState.SelectedSeed = "Corn";
         //toggleSeedButtons(); //then hide the shop buttons, and show harvest button
     }//GEN-LAST:event_Corn_ButtonActionPerformed
 
     private void Pumpkin_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pumpkin_ButtonActionPerformed
-        System.out.println("Pumpkin planted!");
+        System.out.println("GameScreen: Pumpkin planted!");
         GlobalState.SelectedSeed = "Pumpkin";
         //toggleSeedButtons(); //then hide the shop buttons, and show harvest button
     }//GEN-LAST:event_Pumpkin_ButtonActionPerformed
 
-    /**
-     * Listens to key presses and changes what tool is selected based on the key
-     * @param evt 
-     */
-    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        System.out.println(evt.getKeyCode() + " pressed.");
-    }//GEN-LAST:event_formKeyPressed
-
- 
-    
     /**
      * The update function of the game
      * @param time Time since the beginning of the game in seconds
@@ -466,6 +452,7 @@ public class GameScreen extends javax.swing.JFrame {
             plot.Update(time);
         }
     }
+            
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CornPanel;
