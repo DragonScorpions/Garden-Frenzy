@@ -24,7 +24,7 @@ public final class Constants {
     public static final Map<String, Seed> Seeds = Map.of(
         "None", new Seed(0, 999, 999),
         "Pumpkin", new Seed(1, 3, 2),
-        "Wheat", new Seed(2, 10, 2),
+        "Strawberry", new Seed(2, 10, 2),
         "Corn", new Seed(3, 10, 2)
     );
     

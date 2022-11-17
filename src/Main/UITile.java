@@ -1,6 +1,8 @@
 package Main;
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import javax.swing.ImageIcon;
+import javax.swing.UIManager;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -21,6 +23,7 @@ public class UITile extends javax.swing.JPanel {
     public UITile() {
         
         initComponents(); //auto-generated, dont mess with me
+        this.setBackground(null); // no background for Tiles
         ImageIcon NoSeed = new ImageIcon("src/Images/EmptyTile.png");
         CenterLabel.setIcon(NoSeed);
         
@@ -30,8 +33,7 @@ public class UITile extends javax.swing.JPanel {
             public void mouseEntered(java.awt.event.MouseEvent evt){
                 borderhandler.showBorder((UITile) CenterLabel.getParent(), "#ff8066", 1);
                 
-            }
-            
+            } 
             @Override
             public void mouseExited(java.awt.event.MouseEvent evt){
                 borderhandler.hideBorder((UITile) CenterLabel.getParent());
@@ -75,6 +77,8 @@ public class UITile extends javax.swing.JPanel {
             }
         });
 
+        seedProgressBar.setOpaque(true);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,7 +94,7 @@ public class UITile extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(CenterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(seedProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 11, Short.MAX_VALUE))
+                .addComponent(seedProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 11, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -128,6 +132,7 @@ public class UITile extends javax.swing.JPanel {
         int worth = tile.Harvest();
         System.out.println("UITile: " + worth + " received!");
         GlobalState.Player.addMoney(worth);  
+        GlobalState.Player.addPlantGrown();
         CenterLabel.setIcon(emptyTile);
         seedProgressBar.setValue(0);
         
@@ -140,18 +145,26 @@ public class UITile extends javax.swing.JPanel {
             if (tile.isRotten())
                 seedProgressBar.setValue(0);
         }
-        
+         
         //only update the bar if there is a seed planted in the tile
         //and if the current tile is not rotten 
         if(!tile.getCurrentSeed().equals("None") && !tile.isRotten())
-            updateProgressBar(time);
+            updateProgressBar(time); 
     }
     
     //Update the progress bar of time until next growth state
     private void updateProgressBar(float time)
     {
+        float percent;
+        
         //Note: progress bar is between 0 and 100%, so set value should be from 0 to 100
-        float percent = tile.calcDifference(time) / Constants.Seeds.get(tile.getCurrentSeed()).GetTime() * 100;
+        if (tile.getGrowthStage() == 2){ // decrease progress bar when fully grown
+            percent = 100 - (tile.calcDifference(time) / Constants.Seeds.get(tile.getCurrentSeed()).GetTime() * 100);
+        }
+        else{ // update progress bar when growing
+            percent = tile.calcDifference(time) / Constants.Seeds.get(tile.getCurrentSeed()).GetTime() * 100;
+        }
+        
         seedProgressBar.setValue((int)Math.ceil(percent));
     }
     

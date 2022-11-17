@@ -2,9 +2,9 @@ package Main;
 
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.SwingConstants;
 
 /**
  * Testing From New Branch
@@ -18,6 +18,7 @@ public class StartScreen extends javax.swing.JFrame{
      */
     
     public StartScreen() {
+   
         
         //create blank player
         highscore = new HighScore();
@@ -28,32 +29,56 @@ public class StartScreen extends javax.swing.JFrame{
             highscore.LoadFromFile();
         
         initComponents();
+        
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null); // Center Screen
-  
-        displayHighScore.setText("<html><center>HIGH SCORE<br/>Amount made: " + highscore.getMoney() + "<br/>Crops Grown: " + highscore.getPlantsGrown() + "</center></html>");
+        this.getContentPane().setBackground(Color.decode("#f0c066")); // set background
+        
+        // no backgrounds on panels
+        jPanel1.setBackground(null);
+        jPanel2.setBackground(null);
+        jPanel3.setBackground(null);
+        
+        // center text in JPanel
+        displayHighScore.setHorizontalAlignment(SwingConstants.CENTER);
+        displayHighScore.setVerticalAlignment(SwingConstants.CENTER);
+        // print and center high score
+        displayHighScore.setText("<html>"
+                                    + "<div style='text-align: center;'>"
+                                                + "<font size = +3> HIGH SCORE </font><br/>"
+                                                + "Amount made: " + highscore.getMoney() + "<br/>"
+                                                + "Crops Grown: " + highscore.getPlantsGrown()
+                                    + "</div>"
+                                + "</html>");
+        
        
+        /* Saved file exist*/
+        btnContinue.setEnabled(GlobalState.Player.FileExists());
         
         /* Hover events for JButtons */
         JButton[] btns = {btnNewGame, btnContinue, btnQuit};
         BorderHandler borderhandler = new BorderHandler();
+        
+        // add hover events for btns
         for(JButton btn: btns){
+            if (btn.isEnabled()){
+                borderhandler.showBorder(btn, "#ff8066", 5);
+            }
             btn.setContentAreaFilled(false);
             btn.addMouseListener(new MouseAdapter(){
                 @Override
                public void mouseEntered(java.awt.event.MouseEvent evt){
-                   borderhandler.showBorder(btn, "#ff8066", 5);
+                   borderhandler.showBorder(btn, "#ff8066", 10);
                }
                
                @Override
                public void mouseExited(java.awt.event.MouseEvent evt){
-                   borderhandler.hideBorder(btn);
+                   borderhandler.showBorder(btn, "#ff8066", 5);
                }
             });
         }
         
-        /*Saved file exist*/
-        btnContinue.setEnabled(GlobalState.Player.FileExists());
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -156,9 +181,10 @@ public class StartScreen extends javax.swing.JFrame{
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(displayHighScore, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,6 +194,7 @@ public class StartScreen extends javax.swing.JFrame{
                 .addContainerGap())
         );
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/GameLogo .png"))); // NOI18N
         jLabel1.setText("GAME LOGO/ TITLE PLACEHOLDER");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -187,9 +214,9 @@ public class StartScreen extends javax.swing.JFrame{
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -209,7 +236,7 @@ public class StartScreen extends javax.swing.JFrame{
     }//GEN-LAST:event_btnContinueActionPerformed
 
     private void btnQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitActionPerformed
-      
+
         dispose();
     }//GEN-LAST:event_btnQuitActionPerformed
 

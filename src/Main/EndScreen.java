@@ -2,9 +2,9 @@ package Main;
 
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -20,31 +20,52 @@ public class EndScreen extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null); // center screen
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.getContentPane().setBackground(Color.decode("#f0c066")); // set background
         
         // Saves the current HighScore to file
+        HighScore prevHighscore = new HighScore();
+        prevHighscore.LoadFromFile();
         HighScore curH = DetermineHighScore(GlobalState.Player);
         curH.SaveToFile();
         
         // Delete 
         GlobalState.Player.DeleteFile();
         
+        jPanel1.setBackground(null); 
+        jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
+        jLabel1.setVerticalAlignment(SwingConstants.CENTER);
+        // add hover events for buttons
         JButton[] btns = {btnPlayAgain, btnStartScreen, btnQuit};
         BorderHandler borderhandler = new BorderHandler();
         for(JButton btn: btns){
+            if (btn.isEnabled()){
+                borderhandler.showBorder(btn, "#ff8066", 5);
+            }
             btn.setContentAreaFilled(false);
             btn.addMouseListener(new MouseAdapter(){
                 @Override
                public void mouseEntered(java.awt.event.MouseEvent evt){
-                   borderhandler.showBorder(btn, "#ff8066", 5);
+                   borderhandler.showBorder(btn, "#ff8066", 10);
                }
                
                @Override
                public void mouseExited(java.awt.event.MouseEvent evt){
-                   borderhandler.hideBorder(btn);
+                   borderhandler.showBorder(btn, "#ff8066", 5);
                }
             });
         }
         
+    }
+    
+    
+    // print highscore
+    private void printHighScore(HighScore highscore){ 
+        jLabel1.setText("<html>"
+                        + "<div style='text-align: center;'>"
+                                    + "<font size = +3> YOUR MADE $" + highscore.getMoney() + "</font><br/>"
+                                    + "Crops Grown: " + highscore.getPlantsGrown()
+                        + "</div>"
+                    + "</html>");
     }
     
     
@@ -55,17 +76,26 @@ public class EndScreen extends javax.swing.JFrame {
      * @return The current HighScore
      */
     private HighScore DetermineHighScore(PlayerData player){
-        HighScore newHS = player.ToHighScore();
+        HighScore currentScore = player.ToHighScore();
         HighScore oldHS = new HighScore();
         
         oldHS.LoadFromFile();
+        if (currentScore.getMoney() > oldHS.getMoney()){
+            // new highscore text
+            jLabel1.setText("<html>"
+                        + "<div style='text-align: center;'>"
+                        + "<font size = +10> <b> NEW HIGHSCORE </b> </font><br/>"
+                        + "<font size = +3> YOUR MADE $" + currentScore.getMoney() + "</font><br/>"
+                        + "Crops Grown: " + currentScore.getPlantsGrown()
+                        + "</div>"
+                    + "</html>");
+            return currentScore;
+        }
         
-        if (newHS.getMoney() > oldHS.getMoney())
-            return newHS;
-        
-        if (newHS.getPlantsGrown() > oldHS.getPlantsGrown())
-            return newHS;
-        
+        //if (newHS.getPlantsGrown() > oldHS.getPlantsGrown())
+           // return newHS;
+           
+        printHighScore(currentScore); // highscore to be determined
         return oldHS;
     }
     
@@ -83,10 +113,10 @@ public class EndScreen extends javax.swing.JFrame {
         btnQuit = new javax.swing.JButton();
         btnPlayAgain = new javax.swing.JButton();
         btnStartScreen = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(573, 677));
-        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
@@ -135,13 +165,25 @@ public class EndScreen extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(41, 37, 0, 0);
         jPanel1.add(btnStartScreen, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 25;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(171, 102, 0, 109);
-        getContentPane().add(jPanel1, gridBagConstraints);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(106, 106, 106)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(105, 105, 105))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -176,6 +218,7 @@ public class EndScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnPlayAgain;
     private javax.swing.JButton btnQuit;
     private javax.swing.JButton btnStartScreen;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

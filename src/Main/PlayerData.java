@@ -39,6 +39,10 @@ public class PlayerData extends FileData {
     {
         money+=amount;
     }
+    
+    public void addPlantGrown(){ 
+        plants_grown += 1;
+    }
 
     /**
      * Gets the player's plants grown
@@ -47,6 +51,8 @@ public class PlayerData extends FileData {
     public int getPlantsGrown() {
         return plants_grown;
     }
+    
+    
     
     /**
      * Transforms this PlayerData into a HighScore to be compared and replace the old one
