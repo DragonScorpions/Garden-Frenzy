@@ -130,7 +130,7 @@ public class StartScreen extends javax.swing.JFrame{
         gridBagConstraints.insets = new java.awt.Insets(41, 25, 13, 25);
         jPanel1.add(btnQuit, gridBagConstraints);
 
-        btnNewGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/StartBtn (3).png"))); // NOI18N
+        btnNewGame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/StartBtn.png"))); // NOI18N
         btnNewGame.setBorder(null);
         btnNewGame.setIconTextGap(-1);
         btnNewGame.setMaximumSize(new java.awt.Dimension(283, 99));
