@@ -293,10 +293,16 @@ public class GameScreen extends javax.swing.JFrame {
         toggleSeedButtons(); //then hide the shop buttons, and show harvest button
     }//GEN-LAST:event_Strawberry_ButtonActionPerformed
 
+    /**
+     * Has the player attempt to buy a pumpkin
+     * @param evt 
+     */
+    
     private void Pumpkin_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pumpkin_ButtonActionPerformed
-        System.out.println("Pumpkin planted!");
-        GlobalState.SelectedSeed = "Pumpkin";
-        toggleSeedButtons(); //then hide the shop buttons, and show harvest button
+        
+            System.out.println("Pumpkin planted!");
+            GlobalState.SelectedSeed = "Pumpkin";
+            toggleSeedButtons(); //then hide the shop buttons, and show harvest button
     }//GEN-LAST:event_Pumpkin_ButtonActionPerformed
 
     private void Corn_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Corn_ButtonActionPerformed
@@ -304,6 +310,7 @@ public class GameScreen extends javax.swing.JFrame {
         GlobalState.SelectedSeed = "Corn";
         toggleSeedButtons(); //then hide the shop buttons, and show harvest button
     }//GEN-LAST:event_Corn_ButtonActionPerformed
+  
     
     /**
      * The update function of the game
