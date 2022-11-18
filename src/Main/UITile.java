@@ -45,8 +45,13 @@ public class UITile extends javax.swing.JPanel {
     //Init function that initializes the tile to be empty
     public void SetTile(Tile tile) {
         this.tile = tile;
-        System.out.print(tile.getCurrentSeed() + " " + tile.getGrowthStage());
+        //System.out.print(tile.getCurrentSeed() + " " + tile.getGrowthStage());
         UpdatePlantImage();
+    }
+    
+    public void disable()
+    {
+        CenterLabel.setEnabled(false);
     }
     
     /**
@@ -106,7 +111,11 @@ public class UITile extends javax.swing.JPanel {
     }//GEN-LAST:event_CenterLabelMouseClicked
 
     private void CenterLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CenterLabelMouseReleased
-        PlantSeed();
+       if(trySubtractMoney(Constants.Seeds.get(GlobalState.SelectedSeed).GetPrice()))
+        {   
+            //if player has enough money
+            PlantSeed();
+        }
     }//GEN-LAST:event_CenterLabelMouseReleased
 
     //Set the newest current seed
@@ -179,9 +188,29 @@ public class UITile extends javax.swing.JPanel {
         } else if (tile.getGrowthStage() == 2)
             seedIcon += tile.getCurrentSeed();
         seedIcon += ".png";
-        System.out.println(seedIcon);
+        //System.out.println(seedIcon);
         ImageIcon plantedSeed = new ImageIcon(seedIcon);
         CenterLabel.setIcon(plantedSeed);
+    }
+    
+        /**
+     * Attempt to subtract money from Playerdata. If money becomes negative,
+     * it does not subtract and returns false. Else, goes through with the
+     * subtraction and return true.
+     * @param amount how much money to attempt to remove
+     * @return worked was money >= 0 after subtraction?
+     */
+    private boolean trySubtractMoney(int amount)
+    {
+        //check if the subtraction would lead to negative money amount
+        if(GlobalState.Player.getMoney()-amount < 0)
+        {
+            return false;
+        }
+        
+        //otherwise actually subtract the money
+        GlobalState.Player.addMoney(0-amount);
+        return true;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
