@@ -86,21 +86,22 @@ public class GameScreen extends javax.swing.JFrame {
                mousePressed to start the time and continue
             */
             continueGlass.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseEntered(java.awt.event.MouseEvent evt){
-            }
+                @Override
+                public void mouseEntered(java.awt.event.MouseEvent evt){
+                }
 
-            @Override
-            public void mouseExited(java.awt.event.MouseEvent evt){
-            }
-            
-            @Override
-            public void mousePressed(java.awt.event.MouseEvent evt){
-                continueGlass.setVisible(false);
-                continueGlass.remove(cont);
-                Timer.Start();
-            }
-        });
+                @Override
+                public void mouseExited(java.awt.event.MouseEvent evt){
+                }
+
+                @Override
+                public void mousePressed(java.awt.event.MouseEvent evt){
+                    continueGlass.setVisible(false);
+                    continueGlass.remove(cont);
+                    Timer.Start();
+                    continueGlass.removeMouseListener(this);
+                }
+            });
         }
         /* This is a new game - start time */
         else{
@@ -482,9 +483,9 @@ public class GameScreen extends javax.swing.JFrame {
      * Ends the games - displays how the player lost
      * @param playerLost set to true if game ends due to player lost, false if time ran out
      */
-    private void endGame(boolean playerLost)
-    {
+    private void endGame(boolean playerLost) {
         Timer.Stop();
+        
         ImageIcon GameOverIcon;
         final JPanel GameOverGlass = (JPanel) this.getGlassPane(); // create glass JPanel
         JLabel gameover = new JLabel(); // JLabel to display 
@@ -520,6 +521,7 @@ public class GameScreen extends javax.swing.JFrame {
             public void mousePressed(java.awt.event.MouseEvent evt){
                 EndScreen endScreen = new EndScreen();
                 endScreen.setVisible(true);
+                GameOverGlass.removeMouseListener(this);
                 dispose();
             }
         });
