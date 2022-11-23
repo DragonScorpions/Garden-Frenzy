@@ -39,6 +39,7 @@ public class UIPlot extends javax.swing.JPanel {
         for (UITile tile : tiles)
             tile.Update(time);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

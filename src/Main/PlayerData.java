@@ -8,6 +8,7 @@ package Main;
 public class PlayerData extends FileData {
     private int money;
     private int plants_grown;
+    private int plants_harvested;
     private int plots_unlocked;
     public Plot[] plots = new Plot[Constants.NumPlots];
     
@@ -30,7 +31,7 @@ public class PlayerData extends FileData {
     public int getMoney() {
         return money;
     }
-    
+     
     /**
      * adds specified amount to the player's money
      * @param amount the amount of money to be added.
@@ -38,6 +39,15 @@ public class PlayerData extends FileData {
     public void addMoney(int amount)
     {
         money+=amount;
+    }
+    
+    
+    /**
+     * Checks if the player has
+     * @return player has money
+     */
+    public boolean hasMoney(){
+        return money > 0;
     }
     
     public void addPlantGrown(){ 
@@ -51,7 +61,6 @@ public class PlayerData extends FileData {
     public int getPlantsGrown() {
         return plants_grown;
     }
-    
     
     
     /**

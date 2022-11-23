@@ -30,6 +30,7 @@ public class Seed {
      * @param worth The amount of money gotten from harvesting the plant
      * @param time The amount of time it takes the seed to grow
      * @param stages The amount of growth stages that the plant has
+     * @param price The amount of money a seed a cost
      */
     public Seed(int worth, int time, int stages, int price) {
         this.worth = worth;

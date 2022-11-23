@@ -31,6 +31,14 @@ public class Tile {
         return rotten;
     }
     
+    public boolean isFilled(){
+        if ("None".equals(currentSeed)){
+            return false;
+        }
+        
+        return true;
+    }
+    
     public int getGrowthStage(){
         return growth_stage;
     }
