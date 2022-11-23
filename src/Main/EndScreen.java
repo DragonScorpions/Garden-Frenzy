@@ -62,7 +62,7 @@ public class EndScreen extends javax.swing.JFrame {
     private void printHighScore(HighScore highscore){ 
         jLabel1.setText("<html>"
                         + "<div style='text-align: center;'>"
-                                    + "<font size = +3> YOUR MADE $" + highscore.getMoney() + "</font><br/>"
+                                    + "<font size = +3> YOU MADE $" + highscore.getMoney() + "</font><br/>"
                                     + "Crops Grown: " + highscore.getPlantsGrown()
                         + "</div>"
                     + "</html>");
@@ -191,7 +191,7 @@ public class EndScreen extends javax.swing.JFrame {
     private void btnPlayAgainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayAgainActionPerformed
         
         GlobalState.Player = new PlayerData(); // create blank player data
-        GameScreen gameScreen = new GameScreen();
+        GameScreen gameScreen = new GameScreen(false);
         gameScreen.show();
         
         dispose();

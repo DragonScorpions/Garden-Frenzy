@@ -19,6 +19,9 @@ public final class Timer {
     // The time since the last timer start in seconds
     private static float time = 0;
     
+    private static int minutes = 0;
+    private static int seconds = 0;
+    
     /**
      * Sets the listener that will be notified when the Timer updates
      * @param listener The listener that will be notified
@@ -54,6 +57,8 @@ public final class Timer {
         javaTimer.cancel();
 
         time = 0;
+        minutes = 0;
+        seconds = 0;
     }
 
     /**
@@ -62,6 +67,51 @@ public final class Timer {
      */
     public static float GetTime() {
         return time;
+    }
+    
+    
+    /**
+     * Builds a string that represents time
+     * @return String of time 00:00
+     */
+    public static String GetTimeAsString(){
+        StringBuilder timeAsString = new StringBuilder();
+        ConvertTimeToMinutesSeconds();
+        
+        if (minutes < 10){
+            timeAsString.append(0);
+        }
+        
+        timeAsString.append(minutes);
+        timeAsString.append(":");
+        
+        if (seconds < 10){
+            timeAsString.append(0);
+        }
+        timeAsString.append(seconds);
+        
+        return timeAsString.toString();
+    }
+    
+    /**
+     * calculates minutes and seconds of time
+     */
+    private static void ConvertTimeToMinutesSeconds(){
+        if (seconds == (int) time){ 
+            return;
+        }
+       
+        if (time < 60){ 
+            seconds = (int) time;
+        }
+        else{
+            seconds = (int) time - (60 * minutes);
+        }
+        if ((int)seconds != 0 && seconds % 60 == 0){
+            minutes++;
+            seconds = 0;
+        }
+        
     }
 
     /**

@@ -19,30 +19,31 @@ public class StartScreen extends javax.swing.JFrame{
     
     public StartScreen() {
    
-        
-        //create blank player
+        /* create blank player */
         highscore = new HighScore();
         GlobalState.Player = new PlayerData();
         
-        // Load highscore from file if it exists
+        /* Load highscore from file if it exists */
         if (highscore.FileExists())
             highscore.LoadFromFile();
         
         initComponents();
         
+        /* settings for JFrame */
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null); // Center Screen
-        this.getContentPane().setBackground(Color.decode("#f0c066")); // set background
+        this.setLocationRelativeTo(null); // center frame to screen
+        this.getContentPane().setBackground(Color.decode("#f0c066"));
         
-        // no backgrounds on panels
+        /* no backgrounds for panels */
         jPanel1.setBackground(null);
         jPanel2.setBackground(null);
         jPanel3.setBackground(null);
         
-        // center text in JPanel
+        /* center text for displaying high score */
         displayHighScore.setHorizontalAlignment(SwingConstants.CENTER);
         displayHighScore.setVerticalAlignment(SwingConstants.CENTER);
-        // print and center high score
+        
+        /* print highscore */
         displayHighScore.setText("<html>"
                                     + "<div style='text-align: center;'>"
                                                 + "<font size = +3> HIGH SCORE </font><br/>"
@@ -52,14 +53,14 @@ public class StartScreen extends javax.swing.JFrame{
                                 + "</html>");
         
        
-        /* Saved file exist*/
+        /* Saved file exist */
         btnContinue.setEnabled(GlobalState.Player.FileExists());
         
-        /* Hover events for JButtons */
+        
         JButton[] btns = {btnNewGame, btnContinue, btnQuit};
         BorderHandler borderhandler = new BorderHandler();
         
-        // add hover events for btns
+        /* Hover events for buttons New Game, Continue, Quit */
         for(JButton btn: btns){
             if (btn.isEnabled()){
                 borderhandler.showBorder(btn, "#ff8066", 5);
@@ -77,6 +78,8 @@ public class StartScreen extends javax.swing.JFrame{
                }
             });
         }
+        
+        
         
         
     }
@@ -225,25 +228,33 @@ public class StartScreen extends javax.swing.JFrame{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    /**
+     * Continue button - set as disabled in constructor if a game does not currently exist
+     * @param evt 
+     */
     private void btnContinueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinueActionPerformed
         // player is continuing old session
         // load old gamestate from file
         GlobalState.Player.LoadFromFile();
-        GameScreen gameScreen = new GameScreen();
+        GameScreen gameScreen = new GameScreen(true);
         gameScreen.show();
         
         dispose();
     }//GEN-LAST:event_btnContinueActionPerformed
 
+    
+    /* Quit Button - exits game */
     private void btnQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitActionPerformed
 
         dispose();
     }//GEN-LAST:event_btnQuitActionPerformed
 
     
+    /* New Game button - begins a new game session */
     private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewGameActionPerformed
         // Creating new session
-        GameScreen gameScreen = new GameScreen();
+        GameScreen gameScreen = new GameScreen(false);
         gameScreen.show();
 
         dispose();

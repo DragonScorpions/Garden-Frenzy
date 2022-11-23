@@ -1,8 +1,7 @@
 package Main;
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import javax.swing.ImageIcon;
-import javax.swing.UIManager;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -38,6 +37,7 @@ public class UITile extends javax.swing.JPanel {
             public void mouseExited(java.awt.event.MouseEvent evt){
                 borderhandler.hideBorder((UITile) CenterLabel.getParent());
             }
+            
         });
           
     }
@@ -47,6 +47,7 @@ public class UITile extends javax.swing.JPanel {
         this.tile = tile;
         //System.out.print(tile.getCurrentSeed() + " " + tile.getGrowthStage());
         UpdatePlantImage();
+        
     }
     
     public void disable()
@@ -88,11 +89,10 @@ public class UITile extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CenterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(CenterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(seedProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(85, 85, 85))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,19 +104,18 @@ public class UITile extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    //When the text is clicked, do what?
-    private void CenterLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CenterLabelMouseClicked
-
-        
-    }//GEN-LAST:event_CenterLabelMouseClicked
-
     private void CenterLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CenterLabelMouseReleased
-       if(trySubtractMoney(Constants.Seeds.get(GlobalState.SelectedSeed).GetPrice()))
+        if(trySubtractMoney(Constants.Seeds.get(GlobalState.SelectedSeed).GetPrice()))
         {   
             //if player has enough money
             PlantSeed();
         }
     }//GEN-LAST:event_CenterLabelMouseReleased
+
+    //When the text is clicked, do what?
+    private void CenterLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CenterLabelMouseClicked
+           
+    }//GEN-LAST:event_CenterLabelMouseClicked
 
     //Set the newest current seed
     private void PlantSeed() {
@@ -193,7 +192,7 @@ public class UITile extends javax.swing.JPanel {
         CenterLabel.setIcon(plantedSeed);
     }
     
-        /**
+       /**
      * Attempt to subtract money from Playerdata. If money becomes negative,
      * it does not subtract and returns false. Else, goes through with the
      * subtraction and return true.
@@ -212,7 +211,7 @@ public class UITile extends javax.swing.JPanel {
         GlobalState.Player.addMoney(0-amount);
         return true;
     }
-    
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CenterLabel;
     private javax.swing.JProgressBar seedProgressBar;

@@ -19,6 +19,16 @@ public class Plot {
         }
     }
     
-    
-    
+    public boolean hasSeeds(){
+        boolean hasSeeds = false;
+        
+        for (Tile tile : tiles){
+            hasSeeds = tile.isFilled();
+            if (hasSeeds == true){
+                return true;
+            }
+        }
+        
+        return hasSeeds;
+    }
 }
