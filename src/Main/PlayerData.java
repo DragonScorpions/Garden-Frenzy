@@ -1,5 +1,7 @@
 package Main;
 
+import java.util.Arrays;
+
 /**
  * Stores the player's values
  *
@@ -21,7 +23,7 @@ public class PlayerData extends FileData {
         plots_unlocked = 0;
         //initialize plots - make this a function later
         for(int i =0;i<9;i++)
-            plots[i] = new Plot();
+            plots[i] = new Plot(i != 0);
     }
     
     /**
@@ -75,11 +77,8 @@ public class PlayerData extends FileData {
     protected String ToFileString() {
         String fileString = money + ", " + plants_grown + ", " + plots_unlocked + ", " + Timer.GetTime() + "\n";
         
-        for(int p = 0; p < Constants.NumPlots; p++) {
-            for(int t = 0; t < Constants.TilesPerPlot; t++) {
-                fileString += plots[p].tiles[t].ToSaveString() + "\n";
-            }
-        }
+        for(int p = 0; p < Constants.NumPlots; p++)
+            fileString += plots[p].ToSaveString();
             
         return fileString;
     }
@@ -94,11 +93,8 @@ public class PlayerData extends FileData {
         plots_unlocked = Integer.parseInt(fields[2]);
         Timer.SetTime(Float.parseFloat(fields[3]));
         
-        for(int p = 0, i = 1; p < Constants.NumPlots; p++) {
-            for(int t = 0; t < Constants.TilesPerPlot; t++) {
-                plots[p].tiles[t].FromSaveString(properties[i++]);
-            }
-        }
+        for(int p = 0, line = 1; p < Constants.NumPlots; p++)
+            line += plots[p].FromPropertyList(Arrays.copyOfRange(properties, line, properties.length));
     }
 
     @Override

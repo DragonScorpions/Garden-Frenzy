@@ -16,7 +16,7 @@ import java.awt.Rectangle;
  * @author Julia
  */
 public class GameScreen extends javax.swing.JFrame {
-    private UIPlot[] plots;
+    private final UIPlot[] plots;
     private int lastMoney = GlobalState.Player.getMoney();
    
     /**
@@ -156,6 +156,7 @@ public class GameScreen extends javax.swing.JFrame {
         uIPlot5 = new Main.UIPlot();
         uIPlot7 = new Main.UIPlot();
         coin = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 640, 480));
@@ -436,6 +437,8 @@ public class GameScreen extends javax.swing.JFrame {
         coin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/coin.png"))); // NOI18N
         coin.setAlignmentY(0.1F);
 
+        jLabel5.setText("Plot Cost: 12");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -446,6 +449,7 @@ public class GameScreen extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnEndScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnSaveAndExit, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -453,6 +457,8 @@ public class GameScreen extends javax.swing.JFrame {
                                 .addComponent(MoneyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(58, 58, 58))
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(coin)
                                 .addGap(66, 66, 66)))
                         .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -472,16 +478,21 @@ public class GameScreen extends javax.swing.JFrame {
                 .addComponent(PlotsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnSaveAndExit, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEndScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(coin)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(MoneyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)))
+                        .addGap(28, 28, 28))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSaveAndExit, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEndScreen, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
 
@@ -587,6 +598,7 @@ public class GameScreen extends javax.swing.JFrame {
     private void Update(float time) {
         updatePlots(time);
         updateMoneyLabel();
+        
         displayTime(time);
         
         // If 10 minutes have passed, forcibly end the game.
@@ -595,35 +607,6 @@ public class GameScreen extends javax.swing.JFrame {
             System.out.println("Game end due to time up");
             endGame(false);
         }
-        // Check if the player has met the losing conditions
-        else if (checkLose()){
-            System.out.println("Game end due to player lose");
-            endGame(true);
-        }
-    }
-    
-    /**
-     * returns if the player loses if the player has no money and no seeds are planted
-     * @return whether player loses or not
-     */
-    private boolean checkLose(){
-        boolean PlotHasSeed = false;
-        
-        /* player has money, cannot lose */
-        if (GlobalState.Player.hasMoney()){
-            return false;
-        }
-        
-        /* check if any plots have seeds planted */
-        for (int p = 0; p < Constants.NumPlots; p++){
-            PlotHasSeed = GlobalState.Player.plots[p].hasSeeds();
-            /* found a seed */
-            if (PlotHasSeed == true){
-                return false;
-            }
-        }
-        
-        return !PlotHasSeed && !GlobalState.Player.hasMoney();
     }
     
     /**
@@ -656,7 +639,7 @@ public class GameScreen extends javax.swing.JFrame {
     }
     
     private void displayTime(float time){
-        System.out.println(time);
+        //System.out.println(time); //Debug get rid of display time spam
         if (!UITime.getText().equals(Timer.GetTimeAsString())){
             UITime.setText("<html>"
                             + "<div style='text-align: center;'>"
@@ -690,6 +673,7 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JProgressBar jProgressBar1;
     private Main.UIPlot uIPlot1;
     private Main.UIPlot uIPlot2;
