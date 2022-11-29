@@ -10,7 +10,7 @@ abstract class AnimationTimerTask extends TimerTask {
 }
 
 /**
- * A class that handle of the animation of a component
+ * A class that handles of the animation of a component
  * @author willfreeman
  */
 public class Animation {
