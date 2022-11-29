@@ -10,6 +10,9 @@ import java.util.TimerTask;
  * @author willfreeman
  */
 abstract class AnimationTimerTask extends TimerTask {
+    /**
+     * time elapsed from start of animation
+     */
     long elapsedTime = 0L;
 }
 
