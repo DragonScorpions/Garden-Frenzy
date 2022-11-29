@@ -5,15 +5,26 @@ import javax.swing.JComponent;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Extension of TimerTask to support storing elapsed time
+ * @author willfreeman
+ */
 abstract class AnimationTimerTask extends TimerTask {
     long elapsedTime = 0L;
 }
 
 /**
- * A class that handles of the animation of a component
+ * A class that handles the animation of a component
  * @author willfreeman
  */
 public class Animation {
+    /**
+     * Translates a component from startingBounds to endingBounds
+     * @param component component to animate
+     * @param startingBounds start position
+     * @param endingBounds end position
+     * @param timeMs animation time
+     */
     public static void animate(JComponent component, Rectangle startingBounds, Rectangle endingBounds, long timeMs) {
         final Timer timer = new Timer();
         final long interval = 100L;
