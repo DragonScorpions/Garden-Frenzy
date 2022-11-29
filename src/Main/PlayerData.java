@@ -4,13 +4,11 @@ import java.util.Arrays;
 
 /**
  * Stores the player's values
- *
  * @author Julia and Xander
  */
 public class PlayerData extends FileData {
     private int money;
     private int plants_grown;
-    private int plants_harvested;
     private int plots_unlocked;
     public Plot[] plots = new Plot[Constants.NumPlots];
     
@@ -38,11 +36,9 @@ public class PlayerData extends FileData {
      * adds specified amount to the player's money
      * @param amount the amount of money to be added.
      */
-    public void addMoney(int amount)
-    {
+    public void addMoney(int amount) {
         money+=amount;
     }
-    
     
     /**
      * Checks if the player has
@@ -52,6 +48,9 @@ public class PlayerData extends FileData {
         return money > 0;
     }
     
+    /**
+     * Adds 1 to the amount of plants grown
+     */
     public void addPlantGrown(){ 
         plants_grown += 1;
     }
@@ -63,7 +62,6 @@ public class PlayerData extends FileData {
     public int getPlantsGrown() {
         return plants_grown;
     }
-    
     
     /**
      * Transforms this PlayerData into a HighScore to be compared and replace the old one

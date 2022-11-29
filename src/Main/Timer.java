@@ -78,16 +78,14 @@ public final class Timer {
         StringBuilder timeAsString = new StringBuilder();
         ConvertTimeToMinutesSeconds();
         
-        if (minutes < 10){
+        if (minutes < 10)
             timeAsString.append(0);
-        }
         
         timeAsString.append(minutes);
         timeAsString.append(":");
         
-        if (seconds < 10){
+        if (seconds < 10)
             timeAsString.append(0);
-        }
         timeAsString.append(seconds);
         
         return timeAsString.toString();
@@ -97,16 +95,13 @@ public final class Timer {
      * calculates minutes and seconds of time
      */
     private static void ConvertTimeToMinutesSeconds(){
-        if (seconds == (int) time){ 
+        if (seconds == (int) time)
             return;
-        }
        
-        if (time < 60){ 
+        if (time < 60)
             seconds = (int) time;
-        }
-        else{
+        else
             seconds = (int) time - (60 * minutes);
-        }
         if ((int)seconds != 0 && seconds % 60 == 0){
             minutes++;
             seconds = 0;
