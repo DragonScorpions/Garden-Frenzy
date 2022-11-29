@@ -24,9 +24,14 @@ public final class Constants {
     public static final Map<String, Seed> Seeds = Map.of(
         "None", new Seed(0, 999, 999,0),
         "Pumpkin", new Seed(2, 3, 2, 1),
-        "Strawberry", new Seed(2, 10, 2, 1),
+        "Strawberry", new Seed(2, 10, 2, 0),
         "Corn", new Seed(3, 10, 2, 1)
     );
+    
+    /**
+     * The cost to unlock a plot
+     */
+    public static final int PlotCost = 12;
     
     /**
      * The number of plots in a game
