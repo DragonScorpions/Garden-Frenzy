@@ -21,14 +21,13 @@ abstract class AnimationTimerTask extends TimerTask {
 public class Animation {
     public static void animate(JComponent component, Rectangle startingBounds, Rectangle endingBounds, long timeMs) {
         final Timer timer = new Timer();
-        final long interval = 33L;
+        final long interval = 100L;
         
         Rectangle originalComponentBounds = component.getBounds();
         double steps = timeMs / interval;
         
         int deltaX = (int) ((endingBounds.x - startingBounds.x) / steps);
         int deltaY = (int) ((endingBounds.y - startingBounds.y) / steps);
-        double deltaOpactity = 1.0 / steps;
         
         // move component to starting position
         component.setBounds(
