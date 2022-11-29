@@ -19,22 +19,33 @@ abstract class AnimationTimerTask extends TimerTask {
 }
 
 public class Animation {
-    public static void animate(JComponent component, JComponent toComponent, long timeMs) {
+    public static void animate(JComponent component, Rectangle startingBounds, Rectangle endingBounds, long timeMs) {
         final Timer timer = new Timer();
         final long interval = 33L;
         
-        Rectangle startingBounds = component.getBounds();
-        Rectangle endingBounds = toComponent.getBounds();
+        Rectangle originalComponentBounds = component.getBounds();
         double steps = timeMs / interval;
         
         int deltaX = (int) ((endingBounds.x - startingBounds.x) / steps);
         int deltaY = (int) ((endingBounds.y - startingBounds.y) / steps);
+        double deltaOpactity = 1.0 / steps;
+        
+        // move component to starting position
+        component.setBounds(
+            startingBounds.x,
+            startingBounds.y,
+            originalComponentBounds.width,
+            originalComponentBounds.height
+        );
+        
+        component.setVisible(true);
         
         timer.scheduleAtFixedRate(new AnimationTimerTask(){            
             @Override
             public void run() {
                 if (this.elapsedTime >= timeMs) {
                     this.cancel();
+                    component.setVisible(false);
                 } else { // the good shit goes in here
                     Rectangle currentBounds = component.getBounds();
                     component.setBounds(
