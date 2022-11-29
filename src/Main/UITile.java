@@ -150,14 +150,15 @@ public class UITile extends javax.swing.JPanel {
     
     //Set the newest current seed
     private void PlantSeed() {
-        if (tile.isFilled())
-            setErrorText("Has Plant!");
-        else if(!GlobalState.SelectedSeed.equals("None")) { //If the player is actually planting
-            System.out.println("UITile: " + GlobalState.SelectedSeed + " planted!");
-            ImageIcon plantedSeed = new ImageIcon("src/Images/growth_1.png");
-            CenterLabel.setIcon(plantedSeed);
-            tile.Plant(GlobalState.SelectedSeed);
-            seedProgressBar.setValue(0);
+        if(!GlobalState.SelectedSeed.equals("None")) { //If the player is actually planting
+            if (!tile.isFilled()) { // If the tile does not already have a plant on it
+                System.out.println("UITile: " + GlobalState.SelectedSeed + " planted!");
+                ImageIcon plantedSeed = new ImageIcon("src/Images/growth_1.png");
+                CenterLabel.setIcon(plantedSeed);
+                tile.Plant(GlobalState.SelectedSeed);
+                seedProgressBar.setValue(0);
+            } else
+                setErrorText("Has Plant!");
         } else
             HarvestSeed();
     }
