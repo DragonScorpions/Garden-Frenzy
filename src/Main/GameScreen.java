@@ -587,6 +587,7 @@ public class GameScreen extends javax.swing.JFrame {
     private void Update(float time) {
         updatePlots(time);
         updateMoneyLabel();
+        
         displayTime(time);
         
         // If 10 minutes have passed, forcibly end the game.
@@ -656,7 +657,7 @@ public class GameScreen extends javax.swing.JFrame {
     }
     
     private void displayTime(float time){
-        System.out.println(time);
+        //System.out.println(time); //Debug get rid of display time spam
         if (!UITime.getText().equals(Timer.GetTimeAsString())){
             UITime.setText("<html>"
                             + "<div style='text-align: center;'>"
