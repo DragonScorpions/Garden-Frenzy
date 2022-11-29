@@ -9,10 +9,9 @@ import java.awt.event.*;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.Rectangle;
 
 /**
- *
+ * The screen for the actual game that the player plays in
  * @author Julia
  */
 public class GameScreen extends javax.swing.JFrame {
@@ -31,18 +30,14 @@ public class GameScreen extends javax.swing.JFrame {
         coin.setVisible(false);
         
         /* Settings for JFrame */
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        this.getContentPane().setBackground(Color.decode("#f0c066"));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        getContentPane().setBackground(Color.decode("#f0c066"));
         
         /* Settings for JPanels */
         JPanel[] panels = new JPanel[] {PumpkinPanel, StrawberryPanel, CornPanel, buttonPanel, HarvestPanel, PlotsPanel};
-        for (JPanel panel : panels){
+        for (JPanel panel : panels)
             panel.setBackground(null);
-        }
-
-        //set UI layout of shop to the relevant (harvest) mode
-        //toggleSeedButtons();
         
         JButton seedbtns[] = new JButton[] {Pumpkin_Button, Corn_Button, Strawberry_Button};
         BorderHandler borderhandler = new BorderHandler();
@@ -67,15 +62,13 @@ public class GameScreen extends javax.swing.JFrame {
         plots = new UIPlot[] { uIPlot1, uIPlot2, uIPlot3, uIPlot4, uIPlot5, uIPlot6, uIPlot7, uIPlot8, uIPlot9 };
         for (int p = 0; p < Constants.NumPlots; p++)
             plots[p].SetPlot(GlobalState.Player.plots[p]);
-        
-        
                 
         /* Set up timer and start */
         Timer.SetUpdateListener(this::Update);
         
         /* Game is a continued session */
         if (continuedGame){
-            final JPanel continueGlass = (JPanel) this.getGlassPane(); // create a glass panel
+            final JPanel continueGlass = (JPanel) this.getGlassPane(); // get a glass panel
             JLabel cont = new JLabel(); // JLabel to display message
             ImageIcon GameOverIcon = new ImageIcon("src/Images/ClickToContinue.png");
             cont.setIcon(GameOverIcon);
@@ -91,14 +84,6 @@ public class GameScreen extends javax.swing.JFrame {
             */
             continueGlass.addMouseListener(new MouseAdapter(){
                 @Override
-                public void mouseEntered(java.awt.event.MouseEvent evt){
-                }
-
-                @Override
-                public void mouseExited(java.awt.event.MouseEvent evt){
-                }
-
-                @Override
                 public void mousePressed(java.awt.event.MouseEvent evt){
                     continueGlass.setVisible(false);
                     continueGlass.remove(cont);
@@ -108,9 +93,8 @@ public class GameScreen extends javax.swing.JFrame {
             });
         }
         /* This is a new game - start time */
-        else{
+        else
             Timer.Start();
-        }
     }
 
     /**
@@ -437,7 +421,7 @@ public class GameScreen extends javax.swing.JFrame {
         coin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/coin.png"))); // NOI18N
         coin.setAlignmentY(0.1F);
 
-        jLabel5.setText("Plot Cost: 12");
+        jLabel5.setText("Plot Cost: $12");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -512,18 +496,15 @@ public class GameScreen extends javax.swing.JFrame {
         Timer.Stop();
         
         ImageIcon GameOverIcon;
-        final JPanel GameOverGlass = (JPanel) this.getGlassPane(); // create glass JPanel
+        final JPanel GameOverGlass = (JPanel) this.getGlassPane(); // get glass JPanel
         JLabel gameover = new JLabel(); // JLabel to display 
         GameOverGlass.setLayout(new GridBagLayout());
         
         /* Display icon based on if player lost or not */
-        if (playerLost){
+        if (playerLost)
             GameOverIcon = new ImageIcon("src/Images/GameOverLost.png");
-        }
-        else{
+        else
             GameOverIcon = new ImageIcon("src/Images/GameOverTimesUp.png");
-            
-        }
         
         gameover.setIcon(GameOverIcon);
         gameover.setBackground(null);
@@ -534,14 +515,6 @@ public class GameScreen extends javax.swing.JFrame {
             mousePressed to continue to the endScreen
         */
         GameOverGlass.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseEntered(java.awt.event.MouseEvent evt){
-            }
-
-            @Override
-            public void mouseExited(java.awt.event.MouseEvent evt){
-            }
-       
             @Override
             public void mousePressed(java.awt.event.MouseEvent evt){
                 EndScreen endScreen = new EndScreen();
@@ -566,29 +539,21 @@ public class GameScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveAndExitActionPerformed
 
     private void Strawberry_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Strawberry_ButtonActionPerformed
-        System.out.println("GameScreen: Strawberry planted!");
         GlobalState.SelectedSeed = "Strawberry";
-        //toggleSeedButtons(); //then hide the shop buttons, and show harvest button
     }//GEN-LAST:event_Strawberry_ButtonActionPerformed
 
     //Triggered when harvest button clicked, returns player to harvest mode
     //then toggles the UI to harvest layout
     private void HarvestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HarvestButtonActionPerformed
-        System.out.println("GameScreen: Player is harvesting!");
         GlobalState.SelectedSeed = "None";
-        //toggleSeedButtons();
     }//GEN-LAST:event_HarvestButtonActionPerformed
 
     private void Corn_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Corn_ButtonActionPerformed
-        System.out.println("GameScreen: Corn planted!");
         GlobalState.SelectedSeed = "Corn";
-        //toggleSeedButtons(); //then hide the shop buttons, and show harvest button
     }//GEN-LAST:event_Corn_ButtonActionPerformed
 
     private void Pumpkin_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pumpkin_ButtonActionPerformed
-        System.out.println("GameScreen: Pumpkin planted!");
         GlobalState.SelectedSeed = "Pumpkin";
-        //toggleSeedButtons(); //then hide the shop buttons, and show harvest button
     }//GEN-LAST:event_Pumpkin_ButtonActionPerformed
 
     /**
@@ -602,18 +567,14 @@ public class GameScreen extends javax.swing.JFrame {
         displayTime(time);
         
         // If 10 minutes have passed, forcibly end the game.
-        if(time >= 600)
-        {
-            System.out.println("Game end due to time up");
+        if(time >= 300)
             endGame(false);
-        }
     }
     
     /**
      * Update the amount of money the player has
      */
-    private void updateMoneyLabel()
-    {
+    private void updateMoneyLabel() {
         int currentMoney = GlobalState.Player.getMoney();
         MoneyLabel.setText("$" + currentMoney);
         if (currentMoney > lastMoney) {
@@ -631,22 +592,18 @@ public class GameScreen extends javax.swing.JFrame {
      * Update the plots according to time
      * @param time 
      */
-    private void updatePlots(float time)
-    {
-        for (UIPlot plot : plots) {
+    private void updatePlots(float time) {
+        for (UIPlot plot : plots)
             plot.Update(time);
-        }
     }
     
     private void displayTime(float time){
-        //System.out.println(time); //Debug get rid of display time spam
         if (!UITime.getText().equals(Timer.GetTimeAsString())){
             UITime.setText("<html>"
                             + "<div style='text-align: center;'>"
                             + "<font size = +4>" + Timer.GetTimeAsString() + "</font>"
                             + "</div> </html>");
         }
-        
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

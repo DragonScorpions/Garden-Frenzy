@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Main;
 
 import java.awt.Rectangle;
@@ -9,15 +5,14 @@ import javax.swing.JComponent;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- *
- * @author willfreeman
- */
-
 abstract class AnimationTimerTask extends TimerTask {
     long elapsedTime = 0L;
 }
 
+/**
+ * A class that handle of the animation of a component
+ * @author willfreeman
+ */
 public class Animation {
     public static void animate(JComponent component, Rectangle startingBounds, Rectangle endingBounds, long timeMs) {
         final Timer timer = new Timer();
@@ -63,7 +58,5 @@ public class Animation {
                 this.elapsedTime += interval;
             }
         }, 0, interval);
-        
-        
     }
 }

@@ -7,9 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.SwingConstants;
 
 /**
- *
+ * The end screen for the game, shows after the user wins or loses
  * @author Julia
- *
  */
 public class EndScreen extends javax.swing.JFrame {
 
@@ -18,9 +17,9 @@ public class EndScreen extends javax.swing.JFrame {
      */
     public EndScreen() {
         initComponents();
-        this.setLocationRelativeTo(null); // center screen
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.getContentPane().setBackground(Color.decode("#f0c066")); // set background
+        setLocationRelativeTo(null); // center screen
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        getContentPane().setBackground(Color.decode("#f0c066")); // set background
         
         // Saves the current HighScore to file
         HighScore prevHighscore = new HighScore();
@@ -28,7 +27,7 @@ public class EndScreen extends javax.swing.JFrame {
         HighScore curH = DetermineHighScore(GlobalState.Player);
         curH.SaveToFile();
         
-        // Delete 
+        // Delete the current player save as the game has finished
         GlobalState.Player.DeleteFile();
         
         jPanel1.setBackground(null); 
@@ -38,12 +37,11 @@ public class EndScreen extends javax.swing.JFrame {
         JButton[] btns = {btnPlayAgain, btnStartScreen, btnQuit};
         BorderHandler borderhandler = new BorderHandler();
         for(JButton btn: btns){
-            if (btn.isEnabled()){
+            if (btn.isEnabled())
                 borderhandler.showBorder(btn, "#ff8066", 5);
-            }
             btn.setContentAreaFilled(false);
             btn.addMouseListener(new MouseAdapter(){
-                @Override
+               @Override
                public void mouseEntered(java.awt.event.MouseEvent evt){
                    borderhandler.showBorder(btn, "#ff8066", 10);
                }
@@ -54,12 +52,10 @@ public class EndScreen extends javax.swing.JFrame {
                }
             });
         }
-        
     }
     
-    
-    // print highscore
-    private void printHighScore(HighScore highscore){ 
+    // Shows the score of the game
+    private void showScore(HighScore highscore){ 
         jLabel1.setText("<html>"
                         + "<div style='text-align: center;'>"
                                     + "<font size = +3> YOU MADE $" + highscore.getMoney() + "</font><br/>"
@@ -67,7 +63,6 @@ public class EndScreen extends javax.swing.JFrame {
                         + "</div>"
                     + "</html>");
     }
-    
     
     /**
      * Compares new to old HighScore, the higher one being the one that has the 
@@ -91,11 +86,8 @@ public class EndScreen extends javax.swing.JFrame {
                     + "</html>");
             return currentScore;
         }
-        
-        //if (newHS.getPlantsGrown() > oldHS.getPlantsGrown())
-           // return newHS;
            
-        printHighScore(currentScore); // highscore to be determined
+        showScore(currentScore); // highscore to be determined
         return oldHS;
     }
     
@@ -189,7 +181,6 @@ public class EndScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPlayAgainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayAgainActionPerformed
-        
         GlobalState.Player = new PlayerData(); // create blank player data
         GameScreen gameScreen = new GameScreen(false);
         gameScreen.show();
@@ -202,13 +193,11 @@ public class EndScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQuitActionPerformed
 
     private void btnStartScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartScreenActionPerformed
-        
         StartScreen startScreen = new StartScreen();
         startScreen.show();
         
         dispose();
     }//GEN-LAST:event_btnStartScreenActionPerformed
-
 
     /**
      * @param args the command line arguments

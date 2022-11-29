@@ -1,7 +1,6 @@
 package Main;
 import java.awt.event.MouseAdapter;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -19,43 +18,38 @@ public class UITile extends javax.swing.JPanel {
      */
     private Tile tile;
     
+    /**
+     * Creates a new UITile
+     */
     public UITile() {
         
         initComponents(); //auto-generated, dont mess with me
-        this.setBackground(null); // no background for Tiles
+        setBackground(null); // no background for Tiles
         ImageIcon NoSeed = new ImageIcon("src/Images/EmptyTile.png");
         CenterLabel.setIcon(NoSeed);
-        
         
         BorderHandler borderhandler = new BorderHandler();
         CenterLabel.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt){
                 borderhandler.showBorder((UITile) CenterLabel.getParent(), "#ff8066", 1);
-                
-                
             } 
             @Override
             public void mouseExited(java.awt.event.MouseEvent evt){
                 borderhandler.hideBorder((UITile) CenterLabel.getParent());
                 setErrorText(""); //Reset whatever error was previously shown.
             }
-            
         });
           
     }
     
-    //Init function that initializes the tile to be empty
+    /**
+     * Ties the UITile to the underlying Tile class
+     * @param tile The Tile instance
+     */
     public void SetTile(Tile tile) {
         this.tile = tile;
-        //System.out.print(tile.getCurrentSeed() + " " + tile.getGrowthStage());
         UpdatePlantImage();
-        
-    }
-    
-    public void disable()
-    {
-        CenterLabel.setEnabled(false);
     }
     
     /**
@@ -99,9 +93,6 @@ public class UITile extends javax.swing.JPanel {
         CenterLabel.setFont(new java.awt.Font("Segoe UI", 0, 8)); // NOI18N
         CenterLabel.setText("jLabel1");
         CenterLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CenterLabelMouseClicked(evt);
-            }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 CenterLabelMouseReleased(evt);
             }
@@ -145,31 +136,23 @@ public class UITile extends javax.swing.JPanel {
 
     
     private void CenterLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CenterLabelMouseReleased
-        if(trySubtractMoney(Constants.Seeds.get(GlobalState.SelectedSeed).GetPrice()))
-        {   
+        if(trySubtractMoney(Constants.Seeds.get(GlobalState.SelectedSeed).GetPrice())) {   
             //if player has enough money
             PlantSeed();
         }
         else //player doesn't have enough money
-        {
-            System.out.println("UITile:Not enough money!");
             setErrorText("No Money!");
-        }
     }//GEN-LAST:event_CenterLabelMouseReleased
 
-    private void setErrorText(String text)
-    {
+    private void setErrorText(String text) {
         ErrorText.setText(text);
     }
     
-    //When the text is clicked, do what?
-    private void CenterLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CenterLabelMouseClicked
-           
-    }//GEN-LAST:event_CenterLabelMouseClicked
-
     //Set the newest current seed
     private void PlantSeed() {
-        if(!GlobalState.SelectedSeed.equals("None")) { //If the player is actually planting
+        if (tile.isFilled())
+            setErrorText("Has Plant!");
+        else if(!GlobalState.SelectedSeed.equals("None")) { //If the player is actually planting
             System.out.println("UITile: " + GlobalState.SelectedSeed + " planted!");
             ImageIcon plantedSeed = new ImageIcon("src/Images/growth_1.png");
             CenterLabel.setIcon(plantedSeed);
@@ -181,8 +164,7 @@ public class UITile extends javax.swing.JPanel {
     
     //Harvest the current seed of the tile
     //TODO: get worth of seed and add to player wallet
-    private void HarvestSeed()
-    {
+    private void HarvestSeed() {
         System.out.println("UITile: " + tile.getCurrentSeed() + " would harvested!");
         ImageIcon emptyTile = new ImageIcon("src/Images/EmptyTile.png");
 
@@ -196,8 +178,7 @@ public class UITile extends javax.swing.JPanel {
         
     }
     
-    public void Update(float time)
-    {
+    public void Update(float time) {
         if(tile.Update(time)) { //If the growth state has been advanced.
             UpdatePlantImage();
             if (tile.isRotten())
@@ -211,16 +192,13 @@ public class UITile extends javax.swing.JPanel {
     }
     
     //Update the progress bar of time until next growth state
-    private void updateProgressBar(float time)
-    {
+    private void updateProgressBar(float time) {
         float percent;
         //Note: progress bar is between 0 and 100%, so set value should be from 0 to 100
-        if (tile.getGrowthStage() == 2){ // decrease progress bar when fully grown
+        if (tile.getGrowthStage() == 2) // decrease progress bar when fully grown
             percent = 100 - (tile.calcDifference(time) / Constants.Seeds.get(tile.getCurrentSeed()).GetTime() * 100);
-        }
-        else{ // update progress bar when growing
+        else // update progress bar when growing
             percent = tile.calcDifference(time) / Constants.Seeds.get(tile.getCurrentSeed()).GetTime() * 100;
-        }
         
         seedProgressBar.setValue((int)Math.ceil(percent));
     }
@@ -236,7 +214,6 @@ public class UITile extends javax.swing.JPanel {
         } else if (tile.getGrowthStage() == 2)
             seedIcon += tile.getCurrentSeed();
         seedIcon += ".png";
-        //System.out.println(seedIcon);
         ImageIcon plantedSeed = new ImageIcon(seedIcon);
         CenterLabel.setIcon(plantedSeed);
     }
@@ -248,13 +225,10 @@ public class UITile extends javax.swing.JPanel {
      * @param amount how much money to attempt to remove
      * @return worked was money >= 0 after subtraction?
      */
-    private boolean trySubtractMoney(int amount)
-    {
+    private boolean trySubtractMoney(int amount) {
         //check if the subtraction would lead to negative money amount
         if(GlobalState.Player.getMoney()-amount < 0)
-        {
             return false;
-        }
         
         //otherwise actually subtract the money
         GlobalState.Player.addMoney(0-amount);

@@ -2,7 +2,6 @@ package Main;
 
 /**
  * Stores the high score data
- *
  * @author Xander
  */
 public class HighScore extends FileData {
@@ -20,7 +19,6 @@ public class HighScore extends FileData {
 
     /**
      * Create new highscore with the given values
-     *
      * @param money The money in the highscore
      * @param plantsgrown The number of plots grown
      */
@@ -31,7 +29,6 @@ public class HighScore extends FileData {
 
     /**
      * Gets the money of the highscore
-     *
      * @return The amount
      */
     public int getMoney() {
@@ -40,7 +37,6 @@ public class HighScore extends FileData {
 
     /**
      * Get the number of plots grown
-     *
      * @return The number
      */
     public int getPlantsGrown() {
