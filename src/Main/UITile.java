@@ -136,12 +136,7 @@ public class UITile extends javax.swing.JPanel {
 
     
     private void CenterLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CenterLabelMouseReleased
-        if(trySubtractMoney(Constants.Seeds.get(GlobalState.SelectedSeed).GetPrice())) {   
-            //if player has enough money
-            PlantSeed();
-        }
-        else //player doesn't have enough money
-            setErrorText("No Money!");
+        PlantSeed();
     }//GEN-LAST:event_CenterLabelMouseReleased
 
     private void setErrorText(String text) {
@@ -150,13 +145,21 @@ public class UITile extends javax.swing.JPanel {
     
     //Set the newest current seed
     private void PlantSeed() {
-        if(!GlobalState.SelectedSeed.equals("None")) { //If the player is actually planting
-            if (!tile.isFilled()) { // If the tile does not already have a plant on it
-                System.out.println("UITile: " + GlobalState.SelectedSeed + " planted!");
-                ImageIcon plantedSeed = new ImageIcon("src/Images/growth_1.png");
-                CenterLabel.setIcon(plantedSeed);
-                tile.Plant(GlobalState.SelectedSeed);
-                seedProgressBar.setValue(0);
+        //If the player is actually planting
+        if(!GlobalState.SelectedSeed.equals("None")) { 
+            // If the tile does not already have a plant on it
+            if (!tile.isFilled()) { 
+                // Test if has enough money to buy seed
+                int seedPrice = Constants.Seeds.get(GlobalState.SelectedSeed).GetPrice();
+                if(GlobalState.Player.getMoney() >= seedPrice) {   
+                    //if player has enough money
+                    GlobalState.Player.addMoney(-seedPrice);
+                    ImageIcon plantedSeed = new ImageIcon("src/Images/growth_1.png");
+                    CenterLabel.setIcon(plantedSeed);
+                    tile.Plant(GlobalState.SelectedSeed);
+                    seedProgressBar.setValue(0);
+                } else //player doesn't have enough money
+                    setErrorText("No Money!");
             } else
                 setErrorText("Has Plant!");
         } else
@@ -166,12 +169,10 @@ public class UITile extends javax.swing.JPanel {
     //Harvest the current seed of the tile
     //TODO: get worth of seed and add to player wallet
     private void HarvestSeed() {
-        System.out.println("UITile: " + tile.getCurrentSeed() + " would harvested!");
         ImageIcon emptyTile = new ImageIcon("src/Images/EmptyTile.png");
 
         //reset seed tile while adding its worth to player's money amount
         int worth = tile.Harvest();
-        System.out.println("UITile: " + worth + " received!");
         GlobalState.Player.addMoney(worth);  
         GlobalState.Player.addPlantGrown();
         CenterLabel.setIcon(emptyTile);
