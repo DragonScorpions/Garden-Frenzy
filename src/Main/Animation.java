@@ -51,7 +51,7 @@ public class Animation {
                 if (this.elapsedTime >= timeMs) {
                     this.cancel();
                     component.setVisible(false);
-                } else { // the good shit goes in here
+                } else {
                     Rectangle currentBounds = component.getBounds();
                     component.setBounds(
                         currentBounds.x + deltaX,
