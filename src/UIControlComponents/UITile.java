@@ -6,11 +6,6 @@ import UIHelpers.BorderHandler;
 import java.awt.event.MouseAdapter;
 import javax.swing.ImageIcon;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
-
 /**
  * GUI Representation of a Tile
  * @author extre
@@ -29,7 +24,7 @@ public class UITile extends javax.swing.JPanel {
         
         initComponents(); //auto-generated, dont mess with me
         setBackground(null); // no background for Tiles
-        ImageIcon NoSeed = new ImageIcon("src/Images/EmptyTile.png");
+        ImageIcon NoSeed = new ImageIcon(getClass().getResource("/Images/EmptyTile.png"));
         CenterLabel.setIcon(NoSeed);
         
         BorderHandler borderhandler = new BorderHandler();
@@ -160,7 +155,7 @@ public class UITile extends javax.swing.JPanel {
                 if(GlobalState.Player.getMoney() >= seedPrice) {   
                     //if player has enough money
                     GlobalState.Player.addMoney(-seedPrice);
-                    ImageIcon plantedSeed = new ImageIcon("src/Images/growth_1.png");
+                    ImageIcon plantedSeed = new ImageIcon(getClass().getResource("/Images/growth_1.png"));
                     CenterLabel.setIcon(plantedSeed);
                     tile.Plant(GlobalState.SelectedSeed);
                     seedProgressBar.setValue(0);
@@ -176,7 +171,7 @@ public class UITile extends javax.swing.JPanel {
      * Harvests the plant within the tile and adds its value to player balance
      */
     private void HarvestSeed() {
-        ImageIcon emptyTile = new ImageIcon("src/Images/EmptyTile.png");
+        ImageIcon emptyTile = new ImageIcon(getClass().getResource("/Images/EmptyTile.png"));
 
         //reset seed tile while adding its worth to player's money amount
         int worth = tile.Harvest();
@@ -223,7 +218,7 @@ public class UITile extends javax.swing.JPanel {
      * Updates the plant icon based on the Tile 
      */
     private void UpdatePlantImage() {
-        String seedIcon = "src/Images/";
+        String seedIcon = "/Images/";
         if (tile.isRotten() || tile.getCurrentSeed().equals("None"))
             seedIcon += "EmptyTile";
         else if (tile.getGrowthStage() < 2) {
@@ -232,7 +227,7 @@ public class UITile extends javax.swing.JPanel {
         } else if (tile.getGrowthStage() == 2)
             seedIcon += tile.getCurrentSeed();
         seedIcon += ".png";
-        ImageIcon plantedSeed = new ImageIcon(seedIcon);
+        ImageIcon plantedSeed = new ImageIcon(getClass().getResource(seedIcon));
         CenterLabel.setIcon(plantedSeed);
     }
    

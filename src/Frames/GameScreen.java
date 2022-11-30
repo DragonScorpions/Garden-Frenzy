@@ -77,7 +77,7 @@ public class GameScreen extends javax.swing.JFrame {
         if (continuedGame){
             final JPanel continueGlass = (JPanel) this.getGlassPane(); // get a glass panel
             JLabel cont = new JLabel(); // JLabel to display message
-            ImageIcon GameOverIcon = new ImageIcon("src/Images/ClickToContinue.png");
+            ImageIcon GameOverIcon = new ImageIcon(getClass().getResource("/Images/ClickToContinue.png"));
             cont.setIcon(GameOverIcon);
             continueGlass.setLayout(new GridBagLayout()); // Set a GridBagLayout to center JLabel
             continueGlass.add(cont);
@@ -509,9 +509,9 @@ public class GameScreen extends javax.swing.JFrame {
         
         /* Display icon based on if player lost or not */
         if (playerLost)
-            GameOverIcon = new ImageIcon("src/Images/GameOverLost.png");
+            GameOverIcon = new ImageIcon(getClass().getResource("/Images/GameOverLost.png"));
         else
-            GameOverIcon = new ImageIcon("src/Images/GameOverTimesUp.png");
+            GameOverIcon = new ImageIcon(getClass().getResource("/Images/GameOverTimesUp.png"));
         
         gameover.setIcon(GameOverIcon);
         gameover.setBackground(null);

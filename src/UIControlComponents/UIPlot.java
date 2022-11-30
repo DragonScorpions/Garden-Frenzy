@@ -68,7 +68,7 @@ public class UIPlot extends javax.swing.JPanel {
         // Add locked image on top of tiles
         JButton lockedImage = new JButton();
         lockedImage.setSize(168, 168);
-        ImageIcon lockIcon = new ImageIcon("src/Images/lock.png");
+        ImageIcon lockIcon = new ImageIcon(getClass().getResource("/Images/lock.png"));
         lockedImage.setIcon(lockIcon);
         layeredPane.add(lockedImage);
         layeredPane.setLayer(lockedImage, 1);
