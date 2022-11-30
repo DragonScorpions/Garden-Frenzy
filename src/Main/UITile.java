@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
  */
 
 /**
- *
+ * GUI Representation of a Tile
  * @author extre
  */
 public class UITile extends javax.swing.JPanel {
@@ -143,7 +143,9 @@ public class UITile extends javax.swing.JPanel {
         ErrorText.setText(text);
     }
     
-    //Set the newest current seed
+    /**
+     * Plants the seed currently selected by the user
+     */
     private void PlantSeed() {
         //If the player is actually planting
         if(!GlobalState.SelectedSeed.equals("None")) { 
@@ -166,8 +168,9 @@ public class UITile extends javax.swing.JPanel {
             HarvestSeed();
     }
     
-    //Harvest the current seed of the tile
-    //TODO: get worth of seed and add to player wallet
+    /**
+     * Harvests the plant within the tile and adds its value to player balance
+     */
     private void HarvestSeed() {
         ImageIcon emptyTile = new ImageIcon("src/Images/EmptyTile.png");
 
@@ -180,6 +183,10 @@ public class UITile extends javax.swing.JPanel {
         
     }
     
+    /**
+     * Update's plant's growth status based on elapsed time
+     * @param time current game time
+     */
     public void Update(float time) {
         if(tile.Update(time)) { //If the growth state has been advanced.
             UpdatePlantImage();
@@ -193,7 +200,10 @@ public class UITile extends javax.swing.JPanel {
             updateProgressBar(time); 
     }
     
-    //Update the progress bar of time until next growth state
+    /**
+     * Update the progress bar of time until next growth state
+     * @param time current game time
+     */
     private void updateProgressBar(float time) {
         float percent;
         //Note: progress bar is between 0 and 100%, so set value should be from 0 to 100
@@ -205,7 +215,9 @@ public class UITile extends javax.swing.JPanel {
         seedProgressBar.setValue((int)Math.ceil(percent));
     }
     
-    // Updates the plant icon based on the Tile 
+    /**
+     * Updates the plant icon based on the Tile 
+     */
     private void UpdatePlantImage() {
         String seedIcon = "src/Images/";
         if (tile.isRotten() || tile.getCurrentSeed().equals("None"))
@@ -218,23 +230,6 @@ public class UITile extends javax.swing.JPanel {
         seedIcon += ".png";
         ImageIcon plantedSeed = new ImageIcon(seedIcon);
         CenterLabel.setIcon(plantedSeed);
-    }
-    
-       /**
-     * Attempt to subtract money from Playerdata. If money becomes negative,
-     * it does not subtract and returns false. Else, goes through with the
-     * subtraction and return true.
-     * @param amount how much money to attempt to remove
-     * @return worked was money >= 0 after subtraction?
-     */
-    private boolean trySubtractMoney(int amount) {
-        //check if the subtraction would lead to negative money amount
-        if(GlobalState.Player.getMoney()-amount < 0)
-            return false;
-        
-        //otherwise actually subtract the money
-        GlobalState.Player.addMoney(0-amount);
-        return true;
     }
    
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,6 +5,9 @@ package Main;
  * @author Ian
  */
 public class Plot {
+    /**
+     * Tiles within the plot
+     */
     public Tile[] tiles = new Tile[Constants.TilesPerPlot];
     
     private boolean locked = true;

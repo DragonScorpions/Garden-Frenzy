@@ -199,9 +199,6 @@ public class EndScreen extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnStartScreenActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPlayAgain;
