@@ -1,4 +1,4 @@
-package Main;
+package GameModel;
 
 /**
  * Stores the high score data
@@ -43,18 +43,30 @@ public class HighScore extends FileData {
         return plants_grown;
     }
 
+    /**
+     * Return a string of the fields to be saved
+     * @return string of the fields
+     */
     @Override
     protected String ToFileString() {
         return money + ", " + plants_grown;
     }
-
+    
+    /**
+     * Fill fields with fields from a file
+     * @param data The data retrieves from a file
+     */
     @Override
     protected void ParseFileString(String data) {
         String[] properties = data.split(", ");
         money = Integer.parseInt(properties[0]);
         plants_grown = Integer.parseInt(properties[1]);
     }
-
+    
+    /**
+     * Return filename of file
+     * @return filename
+     */
     @Override
     protected String GetFileName() {
         return Constants.HighScoreFile;

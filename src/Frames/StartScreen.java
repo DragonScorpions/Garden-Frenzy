@@ -1,5 +1,9 @@
-package Main;
+package Frames;
 
+import GameModel.GlobalState;
+import GameModel.HighScore;
+import GameModel.PlayerData;
+import UIHelpers.BorderHandler;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import javax.swing.JButton;

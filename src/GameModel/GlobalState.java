@@ -1,4 +1,4 @@
-package Main;
+package GameModel;
 
 /**
  * Contains the global state of the game

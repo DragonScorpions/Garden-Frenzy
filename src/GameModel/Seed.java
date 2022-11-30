@@ -1,4 +1,4 @@
-package Main;
+package GameModel;
 
 /**
  * Gets the data on a seed

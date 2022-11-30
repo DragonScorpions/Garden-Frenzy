@@ -1,4 +1,8 @@
-package Main;
+package UIControlComponents;
+import GameModel.Constants;
+import GameModel.GlobalState;
+import GameModel.Tile;
+import UIHelpers.BorderHandler;
 import java.awt.event.MouseAdapter;
 import javax.swing.ImageIcon;
 
