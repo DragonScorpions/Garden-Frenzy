@@ -10,6 +10,10 @@ public class PlayerData extends FileData {
     private int money;
     private int plants_grown;
     private int plots_unlocked;
+    
+    /**
+     * Plots in the game session and their associated tiles
+     */
     public Plot[] plots = new Plot[Constants.NumPlots];
     
     /**
