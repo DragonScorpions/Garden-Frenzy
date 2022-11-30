@@ -64,7 +64,7 @@ public class EndScreen extends javax.swing.JFrame {
     private void showScore(HighScore highscore){ 
         jLabel1.setText("<html>"
                         + "<div style='text-align: center;'>"
-                                    + "<font size = +3> YOU MADE $" + highscore.getMoney() + "</font><br/>"
+                                    + "<font size = +3> YOU ENDED WITH $" + highscore.getMoney() + "</font><br/>"
                                     + "Crops Grown: " + highscore.getPlantsGrown()
                         + "</div>"
                     + "</html>");
@@ -86,7 +86,7 @@ public class EndScreen extends javax.swing.JFrame {
             jLabel1.setText("<html>"
                         + "<div style='text-align: center;'>"
                         + "<font size = +10> <b> NEW HIGHSCORE </b> </font><br/>"
-                        + "<font size = +3> YOUR MADE $" + currentScore.getMoney() + "</font><br/>"
+                        + "<font size = +3> YOU ENDED WITH $" + currentScore.getMoney() + "</font><br/>"
                         + "Crops Grown: " + currentScore.getPlantsGrown()
                         + "</div>"
                     + "</html>");
