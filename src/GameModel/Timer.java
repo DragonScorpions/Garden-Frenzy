@@ -1,4 +1,4 @@
-package Main;
+package GameModel;
 
 /**
  * Maintains the timings for the game

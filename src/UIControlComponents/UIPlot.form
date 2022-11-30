@@ -71,13 +71,13 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="Main.UITile" name="uITile1">
+        <Component class="UIControlComponents.UITile" name="uITile1">
         </Component>
-        <Component class="Main.UITile" name="uITile2">
+        <Component class="UIControlComponents.UITile" name="uITile2">
         </Component>
-        <Component class="Main.UITile" name="uITile3">
+        <Component class="UIControlComponents.UITile" name="uITile3">
         </Component>
-        <Component class="Main.UITile" name="uITile4">
+        <Component class="UIControlComponents.UITile" name="uITile4">
         </Component>
       </SubComponents>
     </Container>

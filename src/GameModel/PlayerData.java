@@ -1,4 +1,4 @@
-package Main;
+package GameModel;
 
 import java.util.Arrays;
 
@@ -62,7 +62,11 @@ public class PlayerData extends FileData {
     public HighScore ToHighScore() {
         return new HighScore(money, plants_grown);
     }
-
+    
+    /**
+     * Returns a string representing the fields of PlayerData to be saved to a file
+     * @return String representing the fields
+     */
     @Override
     protected String ToFileString() {
         String fileString = money + ", " + plants_grown + ", " + plots_unlocked + ", " + Timer.GetTime() + "\n";
@@ -72,7 +76,11 @@ public class PlayerData extends FileData {
             
         return fileString;
     }
-
+    
+    /**
+     * Fill fields with data found a saved player file
+     * @param data string of fields that were saved to a file
+     */
     @Override
     protected void ParseFileString(String data) {
         String[] properties = data.split("\n");
@@ -86,7 +94,11 @@ public class PlayerData extends FileData {
         for(int p = 0, line = 1; p < Constants.NumPlots; p++)
             line += plots[p].FromPropertyList(Arrays.copyOfRange(properties, line, properties.length));
     }
-
+    
+    /**
+     * Retrieve filename of the saved file
+     * @return string filename
+     */
     @Override
     protected String GetFileName() {
         return Constants.SaveFile;

@@ -1,4 +1,4 @@
-package Main;
+package GameModel;
 
 /**
  * Contains several tiles and starts locked

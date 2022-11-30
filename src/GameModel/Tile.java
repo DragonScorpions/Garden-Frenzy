@@ -1,4 +1,4 @@
-package Main;
+package GameModel;
 
 /**
  * Encapsulates the behavior of a tile in the game, where seeds are planted and

@@ -1,4 +1,4 @@
-package Main;
+package UIHelpers;
 
 import java.awt.Rectangle;
 import javax.swing.JComponent;
