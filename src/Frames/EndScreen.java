@@ -1,5 +1,11 @@
-package Main;
+package Frames;
 
+import GameModel.GlobalState;
+import GameModel.HighScore;
+import GameModel.PlayerData;
+import Frames.GameScreen;
+import Frames.StartScreen;
+import UIHelpers.BorderHandler;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import javax.swing.JButton;
@@ -108,7 +114,6 @@ public class EndScreen extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(573, 677));
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 

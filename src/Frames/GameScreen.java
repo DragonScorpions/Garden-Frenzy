@@ -1,6 +1,13 @@
-package Main;
+package Frames;
 
 
+import GameModel.Constants;
+import GameModel.GlobalState;
+import GameModel.Timer;
+import UIControlComponents.UIPlot;
+import Frames.StartScreen;
+import UIHelpers.Animation;
+import UIHelpers.BorderHandler;
 import java.awt.Color;
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
@@ -130,15 +137,15 @@ public class GameScreen extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         UITime = new javax.swing.JLabel();
         PlotsPanel = new javax.swing.JPanel();
-        uIPlot1 = new Main.UIPlot();
-        uIPlot4 = new Main.UIPlot();
-        uIPlot2 = new Main.UIPlot();
-        uIPlot6 = new Main.UIPlot();
-        uIPlot3 = new Main.UIPlot();
-        uIPlot9 = new Main.UIPlot();
-        uIPlot8 = new Main.UIPlot();
-        uIPlot5 = new Main.UIPlot();
-        uIPlot7 = new Main.UIPlot();
+        uIPlot1 = new UIControlComponents.UIPlot();
+        uIPlot4 = new UIControlComponents.UIPlot();
+        uIPlot2 = new UIControlComponents.UIPlot();
+        uIPlot6 = new UIControlComponents.UIPlot();
+        uIPlot3 = new UIControlComponents.UIPlot();
+        uIPlot9 = new UIControlComponents.UIPlot();
+        uIPlot8 = new UIControlComponents.UIPlot();
+        uIPlot5 = new UIControlComponents.UIPlot();
+        uIPlot7 = new UIControlComponents.UIPlot();
         coin = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -632,14 +639,14 @@ public class GameScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JProgressBar jProgressBar1;
-    private Main.UIPlot uIPlot1;
-    private Main.UIPlot uIPlot2;
-    private Main.UIPlot uIPlot3;
-    private Main.UIPlot uIPlot4;
-    private Main.UIPlot uIPlot5;
-    private Main.UIPlot uIPlot6;
-    private Main.UIPlot uIPlot7;
-    private Main.UIPlot uIPlot8;
-    private Main.UIPlot uIPlot9;
+    private UIControlComponents.UIPlot uIPlot1;
+    private UIControlComponents.UIPlot uIPlot2;
+    private UIControlComponents.UIPlot uIPlot3;
+    private UIControlComponents.UIPlot uIPlot4;
+    private UIControlComponents.UIPlot uIPlot5;
+    private UIControlComponents.UIPlot uIPlot6;
+    private UIControlComponents.UIPlot uIPlot7;
+    private UIControlComponents.UIPlot uIPlot8;
+    private UIControlComponents.UIPlot uIPlot9;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,5 +1,9 @@
-package Main;
+package UIControlComponents;
 
+import GameModel.Constants;
+import GameModel.GlobalState;
+import GameModel.Plot;
+import UIControlComponents.UITile;
 import java.awt.event.MouseAdapter;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -94,10 +98,10 @@ public class UIPlot extends javax.swing.JPanel {
     private void initComponents() {
 
         layeredPane = new javax.swing.JLayeredPane();
-        uITile1 = new Main.UITile();
-        uITile2 = new Main.UITile();
-        uITile3 = new Main.UITile();
-        uITile4 = new Main.UITile();
+        uITile1 = new UIControlComponents.UITile();
+        uITile2 = new UIControlComponents.UITile();
+        uITile3 = new UIControlComponents.UITile();
+        uITile4 = new UIControlComponents.UITile();
 
         layeredPane.setLayer(uITile1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         layeredPane.setLayer(uITile2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -152,9 +156,9 @@ public class UIPlot extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane layeredPane;
-    private Main.UITile uITile1;
-    private Main.UITile uITile2;
-    private Main.UITile uITile3;
-    private Main.UITile uITile4;
+    private UIControlComponents.UITile uITile1;
+    private UIControlComponents.UITile uITile2;
+    private UIControlComponents.UITile uITile3;
+    private UIControlComponents.UITile uITile4;
     // End of variables declaration//GEN-END:variables
 }
