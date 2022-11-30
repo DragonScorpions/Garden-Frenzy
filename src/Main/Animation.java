@@ -48,12 +48,6 @@ public class Animation {
         
         component.setVisible(true);
         
-        System.out.println(
-            "Animieren der Münze von (" +
-            startingBounds.x + "," + startingBounds.y +
-            ") auf (" + endingBounds.x + "," + endingBounds.y + ")"
-        );
-        
         timer.scheduleAtFixedRate(new AnimationTimerTask(){            
             @Override
             public void run() {
